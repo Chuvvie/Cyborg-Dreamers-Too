@@ -5,7 +5,7 @@
 #include "HostState.h"
 #include "GameState.h"
 #include "Universal.h"
-
+#include "StateSubclass.h"
 int main() {
     StateManager sm;
     SplashState s(&sm); // 0
@@ -13,14 +13,16 @@ int main() {
     JoinState js(&sm);  // 2
     HostState hs(&sm);  // 3
     GameState gs(&sm);  // 4
+    EndState es(&sm);   // 5
 
     sm.addState(&s);
     sm.addState(&ms);
     sm.addState(&js);
     sm.addState(&hs);
     sm.addState(&gs);
+    sm.addState(&es);
     sm.push(0);
-    sf::RenderWindow window(sf::VideoMode(Universal::window_width, Universal::window_height), "G-Shift", sf::Style::Close);
+    sf::RenderWindow window(sf::VideoMode(Universal::window_width, Universal::window_height), "Jewel Heist", sf::Style::Close);
     sf::Clock clock;
     float lag = 0;
     while(window.isOpen())

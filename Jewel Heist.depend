@@ -1,0 +1,254 @@
+# depslib dependency file v1.0
+1456188130 source:c:\users\aemiel\documents\github\cyborgdreamers\runner.cpp
+	"StateManager.h"
+	"StateSubclass.h"
+
+1456169464 c:\users\aemiel\documents\github\cyborgdreamers\statemanager.h
+	<vector>
+	"State.h"
+
+1456169464 c:\users\aemiel\documents\github\cyborgdreamers\state.h
+	"Universal.h"
+	<SFML/Graphics.hpp>
+
+1456169464 source:c:\users\aemiel\documents\github\cyborgdreamers\statemanager.cpp
+	"StateManager.h"
+
+1456188130 source:c:\users\aemiel\documents\github\cyborgdreamers\teststate.cpp
+	"State.h"
+
+1456127068 c:\users\aemiel\documents\github\cyborgdreamers\teststate.cpp
+	"State.h"
+	<iostream>
+
+1456169464 c:\users\aemiel\documents\github\cyborgdreamers\universal.h
+
+1456188130 source:c:\users\aemiel\documents\github\cyborgdreamers\gamestate.cpp
+	"StateSubclass.h"
+	"StateManager.h"
+
+1456184941 c:\users\aemiel\documents\github\cyborgdreamers\statesubclass.h
+	"State.h"
+	"EntitySubclass.h"
+	"Map.h"
+	<vector>
+
+1456169464 source:c:\users\aemiel\documents\github\cyborgdreamers\state.cpp
+	"StateManager.h"
+	<cassert>
+
+1456187443 c:\users\aemiel\documents\github\cyborgdreamers\entity.h
+	<SFML/Graphics.hpp>
+
+1456188130 source:c:\users\aemiel\documents\github\cyborgdreamers\character.cpp
+	"EntitySubclass.h"
+	<SFML/Graphics.hpp>
+
+1456187844 c:\users\aemiel\documents\github\cyborgdreamers\entitysubclass.h
+	"Entity.h"
+
+1456188130 source:c:\users\aemiel\documents\github\cyborgdreamers\map.cpp
+	"Map.h"
+	<fstream>
+	<cctype>
+
+1456186761 c:\users\aemiel\documents\github\cyborgdreamers\map.h
+	<SFML/Graphics.hpp>
+
+1462508706 source:c:\users\gian\desktop\cs179\cyborgdreamers-master\character.cpp
+	"EntitySubclass.h"
+	<SFML/Graphics.hpp>
+
+1462515727 c:\users\gian\desktop\cs179\cyborgdreamers-master\entitysubclass.h
+	"Entity.h"
+	"map.h"
+
+1456130694 c:\users\gian\desktop\cs179\cyborgdreamers-master\entity.h
+	<SFML/Graphics.hpp>
+
+1462594088 source:c:\users\gian\desktop\cs179\cyborgdreamers-master\gamestate.cpp
+	"StateManager.h"
+	"GameState.h"
+	<sstream>
+	<cassert>
+	"Universal.h"
+
+1462592126 c:\users\gian\desktop\cs179\cyborgdreamers-master\statesubclass.h
+	"State.h"
+	"EntitySubclass.h"
+	"map.h"
+	<vector>
+	"mapgenerator.h"
+
+1462589528 c:\users\gian\desktop\cs179\cyborgdreamers-master\state.h
+	"Universal.h"
+	<SFML/Graphics.hpp>
+	<iostream>
+
+1462592430 c:\users\gian\desktop\cs179\cyborgdreamers-master\universal.h
+	<string>
+
+1462511568 c:\users\gian\desktop\cs179\cyborgdreamers-master\map.h
+	"Tile.h"
+	"SFML/Graphics/RenderWindow.hpp"
+	<vector>
+
+1462589879 c:\users\gian\desktop\cs179\cyborgdreamers-master\statemanager.h
+	<vector>
+	<iostream>
+	"State.h"
+
+1462511568 source:c:\users\gian\desktop\cs179\cyborgdreamers-master\map.cpp
+	"Map.h"
+	<iostream>
+
+1462592637 source:c:\users\gian\desktop\cs179\cyborgdreamers-master\runner.cpp
+	"StateManager.h"
+	"SplashState.h"
+	"MenuState.h"
+	"JoinState.h"
+	"HostState.h"
+	"GameState.h"
+	"Universal.h"
+	"StateSubclass.h"
+
+1462589488 source:c:\users\gian\desktop\cs179\cyborgdreamers-master\state.cpp
+	"StateManager.h"
+	<cassert>
+
+1462589843 source:c:\users\gian\desktop\cs179\cyborgdreamers-master\statemanager.cpp
+	"StateManager.h"
+
+1462505583 source:c:\users\gian\desktop\cs179\cyborgdreamers-master\teststate.cpp
+	"State.h"
+
+1462472206 c:\users\gian\desktop\cs179\cyborgdreamers-master\tile.h
+	"SFML/Graphics/RenderWindow.hpp"
+	"SFML/Graphics/RectangleShape.hpp"
+
+1460187052 source:c:\users\gian\desktop\cs179\cyborgdreamers-master\mapone.cpp
+	"Mapone.h"
+	<fstream>
+	<cctype>
+
+1460187052 c:\users\gian\desktop\cs179\cyborgdreamers-master\mapone.h
+	<SFML/Graphics.hpp>
+
+1460205280 source:c:\users\gian\desktop\cs179\cyborgdreamers-master\main.cpp
+	<SFML/Graphics.hpp>
+	<iostream>
+	<fstream>
+	<cctype>
+	<string>
+	"mapgenerator.h"
+
+1462468021 c:\users\gian\desktop\cs179\cyborgdreamers-master\mapgenerator.h
+	"map.h"
+	<vector>
+	<SFML/Graphics.hpp>
+
+1462594128 source:c:\users\gian\desktop\cs179\cyborgdreamers-master\mapgenerator.cpp
+	"mapgenerator.h"
+	"SFML/Graphics/Color.hpp"
+	<cstdlib>
+	<ctime>
+	<random>
+	<vector>
+	<iostream>
+	<chrono>
+	<math.h>
+
+1462472233 source:c:\users\gian\desktop\cs179\cyborgdreamers-master\tile.cpp
+	"Tile.h"
+	"SFML/System/Vector2.hpp"
+	"SFML/Graphics/Color.hpp"
+
+1462593942 source:c:\users\gian\desktop\cs179\cyborgdreamers-master\endstate.cpp
+	"StateSubclass.h"
+	"StateManager.h"
+	"SplashState.h"
+	"MenuState.h"
+	"JoinState.h"
+	"HostState.h"
+	"GameState.h"
+	"Universal.h"
+	"mapgenerator.h"
+	<iostream>
+	<fstream>
+
+1461744696 source:d:\cyborgdreamerstoo\cyborg-dreamers-too\button.cpp
+	<SFML/Graphics.hpp>
+	"Button.h"
+	"Universal.h"
+	<stdlib.h>
+	<iostream>
+
+1461703814 d:\cyborgdreamerstoo\cyborg-dreamers-too\button.h
+	<SFML/Graphics.hpp>
+
+1461726306 d:\cyborgdreamerstoo\cyborg-dreamers-too\universal.h
+	<string>
+
+1462480412 source:c:\users\gian\desktop\cs179\cyborgdreamers-master\button.cpp
+	<SFML/Graphics.hpp>
+	"Button.h"
+	"Universal.h"
+	<stdlib.h>
+	<iostream>
+
+1462480412 c:\users\gian\desktop\cs179\cyborgdreamers-master\button.h
+	<SFML/Graphics.hpp>
+
+1462480412 source:c:\users\gian\desktop\cs179\cyborgdreamers-master\hoststate.cpp
+	<SFML/Graphics.hpp>
+	<algorithm>
+	<iostream>
+	<cstdio>
+	"StateManager.h"
+	"HostState.h"
+
+1462480412 c:\users\gian\desktop\cs179\cyborgdreamers-master\hoststate.h
+	"Button.h"
+
+1462590235 source:c:\users\gian\desktop\cs179\cyborgdreamers-master\joinstate.cpp
+	<SFML/Graphics.hpp>
+	<algorithm>
+	<iostream>
+	"StateManager.h"
+	"JoinState.h"
+
+1462480412 c:\users\gian\desktop\cs179\cyborgdreamers-master\joinstate.h
+	"Button.h"
+
+1462593030 source:c:\users\gian\desktop\cs179\cyborgdreamers-master\menustate.cpp
+	"Universal.h"
+	"MenuState.h"
+	"StateManager.h"
+	<iostream>
+	<cstdlib>
+
+1462480412 c:\users\gian\desktop\cs179\cyborgdreamers-master\menustate.h
+	"State.h"
+	"Button.h"
+
+1462480412 c:\users\gian\desktop\cs179\cyborgdreamers-master\splashstate.h
+
+1462480412 source:c:\users\gian\desktop\cs179\cyborgdreamers-master\splashstate.cpp
+	<SFML/Graphics.hpp>
+	<algorithm>
+	<iostream>
+	"StateManager.h"
+	"SplashState.h"
+
+1462592430 c:\users\gian\desktop\cs179\cyborgdreamers-master\gamestate.h
+	<thread>
+	<map>
+	<set>
+	<string>
+	<mutex>
+	"State.h"
+	"EntitySubclass.h"
+	"map.h"
+	<vector>
+	"mapgenerator.h"
+
