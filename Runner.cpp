@@ -7,6 +7,7 @@
 #include "Universal.h"
 #include "StateSubclass.h"
 int main() {
+    srand(time(NULL));
     StateManager sm;
     SplashState s(&sm); // 0
     MenuState ms(&sm);  // 1

@@ -10,21 +10,7 @@
 
 GameState::GameState(StateManager* sm): State(sm), sm(sm){
 
-    gametime.restart();
-    map = generator.generate(32,25,2);
-    map->printTiles();
-    //set the position of the player somewhere in the map
-    while(true)
-    {
-        int XPOS = rand() % (map->getWidth()-1) + 1;
-        int YPOS = rand() % (map->getHeight()-1) + 1;
-        //the position should be in a free tile
-        if(map->getTile(YPOS,XPOS)->getType() ==   0)
-        {
-            player.setPosition(sf::Vector2f(XPOS*32+16,YPOS*32+16));
-            break;
-        }
-    }
+
 
 
 
@@ -40,6 +26,27 @@ void GameState::clientLoop(std::string IP) {
 
 void GameState::onActivate(const std::string& activate) {
 	isActive = true;
+	isOver = false;
+
+	std::cout<<"GAME STATE ACTIVATED" <<std::endl;
+    gametime.restart();
+
+    map = generator.generate(32,25,2);
+     while(true)
+    {
+        int XPOS = rand() % (map->getWidth()-1) + 1;
+        int YPOS = rand() % (map->getHeight()-1) + 1;
+        //the position should be in a free tile
+        if(map->getTile(YPOS,XPOS)->getType() ==   0)
+        {
+            player.setPosition(sf::Vector2f(XPOS*32+16,YPOS*32+16));
+            break;
+        }
+    }
+    map->printTiles();
+    //set the position of the player somewhere in the map
+
+
 	/*
 	service.reset();
 
@@ -202,7 +209,7 @@ void GameState::update(float dt) {
             }
             std::cout<<std::endl;
         }
-        gametime.restart();
+        generator.clearAll();
         sm->push(5,passmap);
     }
 
@@ -240,3 +247,5 @@ void GameState::draw(sf::RenderWindow& window) const {
     player.draw(window);
 
 }
+
+

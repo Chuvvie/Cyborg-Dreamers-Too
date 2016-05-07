@@ -32,6 +32,7 @@ public:
     void split(Leaf *l,int current, int maxdepth);
     void createRooms(Map* map);
     void connectRooms(Map* map);
+    void clearAll();
     };
 
 
