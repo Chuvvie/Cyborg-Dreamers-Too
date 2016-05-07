@@ -1,12 +1,15 @@
 #ifndef UNIVERSAL_H_INCLUDED
 #define UNIVERSAL_H_INCLUDED
+
 #include <string>
 
 struct Universal {
-    static constexpr int window_width = 800;
-    static constexpr int window_height = 600;
+    static constexpr int window_width = 1024;
+    static constexpr int window_height = 800;
     static constexpr float fps = 30.0;
     static constexpr float spf = 1.0/fps;
+    static constexpr float GAME_DURATION = 5.0f;
+
 
     static float clamp(float var, float mini, float maxi)
     {
@@ -29,7 +32,5 @@ struct Universal {
         }
     }
 };
-
-
 
 #endif // UNIVERSAL_H_INCLUDED
