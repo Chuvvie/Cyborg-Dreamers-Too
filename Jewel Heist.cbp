@@ -22,19 +22,32 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
+		<Unit filename="Button.cpp" />
+		<Unit filename="Button.h" />
 		<Unit filename="Character.cpp" />
 		<Unit filename="EndState.cpp" />
 		<Unit filename="Entity.h" />
 		<Unit filename="EntitySubclass.h" />
 		<Unit filename="GameState.cpp" />
+		<Unit filename="GameState.h" />
+		<Unit filename="HostState.cpp" />
+		<Unit filename="HostState.h" />
+		<Unit filename="JoinState.cpp" />
+		<Unit filename="JoinState.h" />
+		<Unit filename="MenuState.cpp" />
+		<Unit filename="MenuState.h" />
+		<Unit filename="OptionsState.cpp" />
+		<Unit filename="OptionsState.h" />
 		<Unit filename="Runner.cpp" />
+		<Unit filename="SplashState.cpp" />
+		<Unit filename="SplashState.h" />
 		<Unit filename="State.cpp" />
 		<Unit filename="State.h" />
 		<Unit filename="StateManager.cpp" />
 		<Unit filename="StateManager.h" />
 		<Unit filename="StateSubclass.h" />
-		<Unit filename="TestState.cpp" />
 		<Unit filename="Universal.h" />
+		<Unit filename="main.cpp" />
 		<Unit filename="map.cpp" />
 		<Unit filename="map.h" />
 		<Unit filename="mapgenerator.cpp" />
