@@ -27,6 +27,7 @@ void ServerSession::receiveHeader() {
 
 	socket.async_receive(buffer(recBuffer.data() + recBytes, (recTotal - recBytes)), [&](boost::system::error_code ec, size_t size) {
 		recBytes += size;
+
 		if (recBytes < recTotal) {
 			receiveHeader();
 		}
@@ -47,6 +48,7 @@ void ServerSession::receiveBody() {
 
 	socket.async_receive(buffer(recBuffer.data() + recBytes, (recTotal - recBytes)), [&](boost::system::error_code ec, size_t size) {
 		recBytes += size;
+
 		if (recBytes < recTotal) 
 		{
 			receiveBody();
@@ -59,13 +61,16 @@ void ServerSession::receiveBody() {
 }
 
 void ServerSession::interpretData() {
-	
 	switch (recType)
 	{
 		case MessageType::CONNECT: {
+
 			std::string desiredName = std::string(reinterpret_cast<char*>(recBuffer.data()));
 			desiredName = gamestate->checkName(desiredName);
-			gamestate->registerSession(id, desiredName);
+			gamestate->registerName(desiredName);
+
+			std::cout << desiredName << "( " << (int)id << " ) Entered! " << std::endl;
+			std::cout << "Sending CONFIRM to " << username << "( " << (int)id << " )" << std::endl;
 
 			std::string toSend = std::to_string(id) + " " + desiredName;
 			MessageHeader mh = MessageHeader{ MessageType::CONFIRM, toSend.length()+1 };
@@ -77,18 +82,25 @@ void ServerSession::interpretData() {
 			break;
 		}
 		case MessageType::MAP_REQUEST: {
+
+			std::cout << username << "( " << (int)id << " ) sent MAP REQUEST! " << std::endl;
+			std::cout << "Sending MAP DATA to " << username << "( " << (int)id << " )" << std::endl;
+
 			MapMessage ms = MapMessage{ gamestate->map->getHeight(), gamestate->map->getWidth()};
-			MessageHeader mh = MessageHeader{ MessageType::MAP_DATA, sizeof(MapMessage) + gamestate->compressedMap->size() };
+			MessageHeader mh = MessageHeader{ MessageType::MAP_DATA, sizeof(MapMessage) + gamestate->compressedMap.length()+1 };
 			std::vector<uint8_t> sendBuffer;
 			sendBuffer.resize(sizeof(MessageHeader) + mh.size);
 			memcpy(sendBuffer.data(), &mh, sizeof(MessageHeader));
 			memcpy(sendBuffer.data() + sizeof(MessageHeader), &ms, sizeof(MapMessage));
-			memcpy(sendBuffer.data() + sizeof(MessageHeader) + sizeof(MapMessage), gamestate->compressedMap->data(), gamestate->compressedMap->size());
+			memcpy(sendBuffer.data() + sizeof(MessageHeader) + sizeof(MapMessage), gamestate->compressedMap.data(), gamestate->compressedMap.length()+1);
 			send(sendBuffer);
 			break;
 		}
 		case MessageType::READY: {
 			gamestate->readyClients++;
+
+			std::cout << username << "( " << (int)id << " ) sent READY! " << std::endl;
+
 			if (gamestate->readyClients == gamestate->totalClients)
 			{
 				std::string toSend = "";
@@ -97,7 +109,9 @@ void ServerSession::interpretData() {
 				sendBuffer.resize(sizeof(MessageHeader) + mh.size);
 				memcpy(sendBuffer.data(), &mh, sizeof(MessageHeader));
 				memcpy(sendBuffer.data() + sizeof(MessageHeader), toSend.data(), mh.size);
-				send(sendBuffer);
+				gamestate->broadcast(sendBuffer);
+
+				std::cout << "Broadcast GAME START to everyone" << std::endl;
 
 				gamestate->inGame = true;
 			}
@@ -106,13 +120,26 @@ void ServerSession::interpretData() {
 		case MessageType::UPDATE_INPUT: {
 			auto inputs = reinterpret_cast<UpdateInputMessage*>(recBuffer.data());
 			// TODO
+
+			std::cout << "Got dummy update input message from " << (int)id << std::endl;
+
 			break;
 		}
-	}
+		case MessageType::DISCONNECT: {
+			gamestate->stillConnected--;
 
-	recBuffer.clear();
-	if (isActive)
+			std::cout << username << "( " << (int)id << " ) sent DISCONNECT! " << std::endl;
+
+			if (gamestate->stillConnected == 1) {
+				(*gamestate->sessions)[this->id] = nullptr;
+				isActive = false;
+			}
+		}
+	}
+	if (isActive) {
+		recBuffer.clear();
 		receiveHeader();
+	}
 }
 
 void ServerSession::activate(bool active) {

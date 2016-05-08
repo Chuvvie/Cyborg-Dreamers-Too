@@ -2,7 +2,6 @@
 #define GAMESTATE_H_INCLUDED
 #include <thread>
 #include <boost/asio.hpp>
-#include <map>
 #include <set>
 #include <string>
 #include <mutex>
@@ -12,6 +11,7 @@
 #include <vector>
 #include "mapgenerator.h"
 #include "ServerSession.h"
+#include "ClientConnection.h"
 
 using namespace boost::asio;
 
@@ -28,23 +28,31 @@ private:
 	std::thread* service_runner;
 
 	// SERVER STUFF
+	friend struct ServerSession;
+
 	MapGenerator* generator; //new
-	std::vector<uint8_t>* compressedMap;
+	std::string compressedMap;
 	std::vector<std::shared_ptr<ServerSession>>* sessions;
-	std::map<std::string, std::shared_ptr<ServerSession>>* nameList;
+	std::set<std::string>* nameList;
 	uint8_t** mapData;
 	size_t totalClients;
+	size_t vacantPlayers;
 	size_t readyClients;
+	size_t stillConnected;
 
 	ip::tcp::endpoint* endpoint;
 	ip::tcp::acceptor* acceptor;
 	ip::tcp::socket* socket;
-	void accept(size_t player);
+	void accept();
 	void broadcast(const std::vector<uint8_t>& copy);
 	std::string checkName(const std::string& desired);
-	void registerSession(int index, std::string username);
+	void registerName(std::string username);
 
-	friend struct ServerSession;
+	// CLIENT STUFF
+	friend struct ClientConnection;
+	ClientConnection* client;
+
+
 public:
 	static const uint16_t tcpPort = 8080;
 

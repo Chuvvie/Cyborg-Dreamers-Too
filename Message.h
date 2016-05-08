@@ -10,7 +10,8 @@ enum MessageType : uint8_t {
 	GAME_START,		// server->client: string( "" )
 	UPDATE_INPUT,	// client->server: UpdateInputMessage{  }
 	UPDATE_DATA,	// server->client: UpdateDataMessage{  }
-	GAME_FINISH		// server->client: string( "" )
+	GAME_FINISH,	// server->client: string( "" )
+	DISCONNECT		// client->server: string( "" )
 };
 
 struct MessageHeader {
@@ -25,6 +26,7 @@ struct MapMessage {
 
 struct UpdateDataMessage {
 	uint8_t ID;
+	bool isAlive;
 	float posX;
 	float posY;
 	int spriteDir;
