@@ -1,7 +1,7 @@
 #ifndef GAMESTATE_H_INCLUDED
 #define GAMESTATE_H_INCLUDED
 #include <thread>
-//#include <boost/asio.hpp>
+#include <boost/asio.hpp>
 #include <map>
 #include <set>
 #include <string>
@@ -11,37 +11,46 @@
 #include "map.h"
 #include <vector>
 #include "mapgenerator.h"
+#include "ServerSession.h"
 
-//using namespace boost::asio;
+using namespace boost::asio;
 
 class GameState: public State {
 private:
     Map* map;
     Character player;
     StateManager* sm;
-	//io_service service;
+	io_service service;
     bool isActive;
     bool isHost;
-	std::thread* clientThread;
-	std::thread* serverThread;
+	bool inGame;
+	std::thread* networkThread;
+	std::thread* service_runner;
 
-	//friend class ClientSide;
+	// SERVER STUFF
+	MapGenerator* generator; //new
+	std::vector<uint8_t>* compressedMap;
+	std::vector<std::shared_ptr<ServerSession>>* sessions;
+	std::map<std::string, std::shared_ptr<ServerSession>>* nameList;
+	uint8_t** mapData;
+	size_t totalClients;
+	size_t readyClients;
 
+	ip::tcp::endpoint* endpoint;
+	ip::tcp::acceptor* acceptor;
+	ip::tcp::socket* socket;
+	void accept(size_t player);
+	void broadcast(const std::vector<uint8_t>& copy);
+	std::string checkName(const std::string& desired);
+	void registerSession(int index, std::string username);
+
+	friend struct ServerSession;
 public:
-
-
-    MapGenerator generator; //new
-    bool isOver = false; //new
-    sf::Clock gametime;
-
-
 	static const uint16_t tcpPort = 8080;
-	static const uint16_t serverListenPort = 8080;
-	static const uint16_t clientListenPort = 8181;
 
     GameState(StateManager* sm);
-    void serverLoop(size_t players);
-    void clientLoop(std::string ip);
+    void serverLoop(size_t players, std::string username);
+    void clientLoop(std::string ip, std::string username);
     void onActivate(const std::string& accept);
     void onDeactivate();
     void handleInput(int u, int v, const std::string& typed);
