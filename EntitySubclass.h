@@ -25,6 +25,7 @@ public:
     sf::Vector2i getIndexPosition();
     sf::Vector2f getPosition();
     sf::Vector2f setPosition(sf::Vector2f pos);
+    Movement getDirection();
 };
 
 #endif // ENTITYSUBCLASS_H_INCLUDED
