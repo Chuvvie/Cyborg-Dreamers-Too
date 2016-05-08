@@ -260,3 +260,237 @@
 	"StateManager.h"
 	"HostState.h"
 
+1462724532 source:c:\users\lenovox230\desktop\school\college\third year\first sem\179.14 projects\jewelheistrevamped2\new folder\cyborg-dreamers-too\button.cpp
+	<SFML/Graphics.hpp>
+	"Button.h"
+	"Universal.h"
+	<stdlib.h>
+	<iostream>
+
+1462724532 c:\users\lenovox230\desktop\school\college\third year\first sem\179.14 projects\jewelheistrevamped2\new folder\cyborg-dreamers-too\button.h
+	<SFML/Graphics.hpp>
+
+1462724532 c:\users\lenovox230\desktop\school\college\third year\first sem\179.14 projects\jewelheistrevamped2\new folder\cyborg-dreamers-too\universal.h
+	<string>
+
+1462733847 source:c:\users\lenovox230\desktop\school\college\third year\first sem\179.14 projects\jewelheistrevamped2\new folder\cyborg-dreamers-too\character.cpp
+	"EntitySubclass.h"
+	<SFML/Graphics.hpp>
+
+1462733913 c:\users\lenovox230\desktop\school\college\third year\first sem\179.14 projects\jewelheistrevamped2\new folder\cyborg-dreamers-too\entitysubclass.h
+	"Entity.h"
+	"map.h"
+
+1462724532 c:\users\lenovox230\desktop\school\college\third year\first sem\179.14 projects\jewelheistrevamped2\new folder\cyborg-dreamers-too\entity.h
+	<SFML/Graphics.hpp>
+
+1462724532 c:\users\lenovox230\desktop\school\college\third year\first sem\179.14 projects\jewelheistrevamped2\new folder\cyborg-dreamers-too\map.h
+	"Tile.h"
+	"SFML/Graphics/RenderWindow.hpp"
+	<vector>
+
+1462724532 c:\users\lenovox230\desktop\school\college\third year\first sem\179.14 projects\jewelheistrevamped2\new folder\cyborg-dreamers-too\tile.h
+	"SFML/Graphics/RenderWindow.hpp"
+	"SFML/Graphics/RectangleShape.hpp"
+
+1462724532 source:c:\users\lenovox230\desktop\school\college\third year\first sem\179.14 projects\jewelheistrevamped2\new folder\cyborg-dreamers-too\endstate.cpp
+	"StateSubclass.h"
+	"StateManager.h"
+	"SplashState.h"
+	"MenuState.h"
+	"JoinState.h"
+	"HostState.h"
+	"GameState.h"
+	"Universal.h"
+	"mapgenerator.h"
+	<iostream>
+	<fstream>
+
+1462724532 c:\users\lenovox230\desktop\school\college\third year\first sem\179.14 projects\jewelheistrevamped2\new folder\cyborg-dreamers-too\statesubclass.h
+	"State.h"
+	"EntitySubclass.h"
+	"map.h"
+	<vector>
+	"mapgenerator.h"
+
+1462724532 c:\users\lenovox230\desktop\school\college\third year\first sem\179.14 projects\jewelheistrevamped2\new folder\cyborg-dreamers-too\state.h
+	"Universal.h"
+	<SFML/Graphics.hpp>
+	<iostream>
+
+1462724532 c:\users\lenovox230\desktop\school\college\third year\first sem\179.14 projects\jewelheistrevamped2\new folder\cyborg-dreamers-too\mapgenerator.h
+	"map.h"
+	<vector>
+	<SFML/Graphics.hpp>
+
+1462724532 c:\users\lenovox230\desktop\school\college\third year\first sem\179.14 projects\jewelheistrevamped2\new folder\cyborg-dreamers-too\statemanager.h
+	<vector>
+	<iostream>
+	"State.h"
+
+1462724532 c:\users\lenovox230\desktop\school\college\third year\first sem\179.14 projects\jewelheistrevamped2\new folder\cyborg-dreamers-too\splashstate.h
+
+1462724532 c:\users\lenovox230\desktop\school\college\third year\first sem\179.14 projects\jewelheistrevamped2\new folder\cyborg-dreamers-too\menustate.h
+	"State.h"
+	"Button.h"
+
+1462724532 c:\users\lenovox230\desktop\school\college\third year\first sem\179.14 projects\jewelheistrevamped2\new folder\cyborg-dreamers-too\joinstate.h
+	"Button.h"
+
+1462724532 c:\users\lenovox230\desktop\school\college\third year\first sem\179.14 projects\jewelheistrevamped2\new folder\cyborg-dreamers-too\hoststate.h
+	"Button.h"
+
+1462733184 c:\users\lenovox230\desktop\school\college\third year\first sem\179.14 projects\jewelheistrevamped2\new folder\cyborg-dreamers-too\gamestate.h
+	<thread>
+	<map>
+	<set>
+	<string>
+	"State.h"
+	"HUD.h"
+	"NPC.h"
+	"EntitySubclass.h"
+	"map.h"
+	"CollisionDetector.h"
+	<vector>
+	"mapgenerator.h"
+
+1462733433 source:c:\users\lenovox230\desktop\school\college\third year\first sem\179.14 projects\jewelheistrevamped2\new folder\cyborg-dreamers-too\gamestate.cpp
+	"StateManager.h"
+	"GameState.h"
+	<sstream>
+	<cassert>
+	"Universal.h"
+
+1462724532 source:c:\users\lenovox230\desktop\school\college\third year\first sem\179.14 projects\jewelheistrevamped2\new folder\cyborg-dreamers-too\hoststate.cpp
+	<SFML/Graphics.hpp>
+	<algorithm>
+	<iostream>
+	<cstdio>
+	"StateManager.h"
+	"HostState.h"
+
+1462724532 source:c:\users\lenovox230\desktop\school\college\third year\first sem\179.14 projects\jewelheistrevamped2\new folder\cyborg-dreamers-too\joinstate.cpp
+	<SFML/Graphics.hpp>
+	<algorithm>
+	<iostream>
+	"StateManager.h"
+	"JoinState.h"
+
+1462724532 source:c:\users\lenovox230\desktop\school\college\third year\first sem\179.14 projects\jewelheistrevamped2\new folder\cyborg-dreamers-too\main.cpp
+	<SFML/Graphics.hpp>
+	<iostream>
+	<fstream>
+	<cctype>
+	<string>
+	"mapgenerator.h"
+
+1462724532 source:c:\users\lenovox230\desktop\school\college\third year\first sem\179.14 projects\jewelheistrevamped2\new folder\cyborg-dreamers-too\map.cpp
+	"Map.h"
+	<iostream>
+
+1462724532 source:c:\users\lenovox230\desktop\school\college\third year\first sem\179.14 projects\jewelheistrevamped2\new folder\cyborg-dreamers-too\mapgenerator.cpp
+	"mapgenerator.h"
+	"SFML/Graphics/Color.hpp"
+	<cstdlib>
+	<ctime>
+	<random>
+	<vector>
+	<iostream>
+	<chrono>
+	<math.h>
+
+1462724532 source:c:\users\lenovox230\desktop\school\college\third year\first sem\179.14 projects\jewelheistrevamped2\new folder\cyborg-dreamers-too\menustate.cpp
+	"Universal.h"
+	"MenuState.h"
+	"StateManager.h"
+	<iostream>
+	<cstdlib>
+
+1462724532 source:c:\users\lenovox230\desktop\school\college\third year\first sem\179.14 projects\jewelheistrevamped2\new folder\cyborg-dreamers-too\optionsstate.cpp
+	<SFML/Graphics.hpp>
+	<algorithm>
+	<iostream>
+	<cstdio>
+	"StateManager.h"
+	"HostState.h"
+
+1462724532 source:c:\users\lenovox230\desktop\school\college\third year\first sem\179.14 projects\jewelheistrevamped2\new folder\cyborg-dreamers-too\runner.cpp
+	"StateManager.h"
+	"SplashState.h"
+	"MenuState.h"
+	"JoinState.h"
+	"HostState.h"
+	"GameState.h"
+	"Universal.h"
+	"StateSubclass.h"
+
+1462724532 source:c:\users\lenovox230\desktop\school\college\third year\first sem\179.14 projects\jewelheistrevamped2\new folder\cyborg-dreamers-too\splashstate.cpp
+	<SFML/Graphics.hpp>
+	<algorithm>
+	<iostream>
+	"StateManager.h"
+	"SplashState.h"
+
+1462724532 source:c:\users\lenovox230\desktop\school\college\third year\first sem\179.14 projects\jewelheistrevamped2\new folder\cyborg-dreamers-too\state.cpp
+	"StateManager.h"
+	<cassert>
+
+1462724532 source:c:\users\lenovox230\desktop\school\college\third year\first sem\179.14 projects\jewelheistrevamped2\new folder\cyborg-dreamers-too\statemanager.cpp
+	"StateManager.h"
+
+1462724532 source:c:\users\lenovox230\desktop\school\college\third year\first sem\179.14 projects\jewelheistrevamped2\new folder\cyborg-dreamers-too\tile.cpp
+	"Tile.h"
+	"SFML/System/Vector2.hpp"
+	"SFML/Graphics/Color.hpp"
+
+1462729750 source:c:\users\lenovox230\desktop\school\college\third year\first sem\179.14 projects\jewelheistrevamped2\new folder\cyborg-dreamers-too\ai.cpp
+	<iostream>
+	"AI.h"
+	<time.h>
+	<random>
+	<exception>
+
+1462729756 c:\users\lenovox230\desktop\school\college\third year\first sem\179.14 projects\jewelheistrevamped2\new folder\cyborg-dreamers-too\ai.h
+	"NPC.h"
+	"Map.h"
+
+1462730535 c:\users\lenovox230\desktop\school\college\third year\first sem\179.14 projects\jewelheistrevamped2\new folder\cyborg-dreamers-too\npc.h
+	"Entity.h"
+	"Map.h"
+
+1462733928 source:c:\users\lenovox230\desktop\school\college\third year\first sem\179.14 projects\jewelheistrevamped2\new folder\cyborg-dreamers-too\collisiondetector.cpp
+	"CollisionDetector.h"
+	<vector>
+	<iterator>
+	<iostream>
+	<SFML/Graphics.hpp>
+
+1462726846 source:c:\users\lenovox230\desktop\school\college\third year\first sem\179.14 projects\jewelheistrevamped2\new folder\cyborg-dreamers-too\hud.cpp
+	"HUD.h"
+	"Universal.h"
+	<SFML/Graphics.hpp>
+	<string>
+	<cmath>
+	<iostream>
+
+1462711795 c:\users\lenovox230\desktop\school\college\third year\first sem\179.14 projects\jewelheistrevamped2\new folder\cyborg-dreamers-too\hud.h
+	<SFML/Graphics.hpp>
+	<SFML/Window.hpp>
+	<string>
+	"EntitySubclass.h"
+
+1462730503 source:c:\users\lenovox230\desktop\school\college\third year\first sem\179.14 projects\jewelheistrevamped2\new folder\cyborg-dreamers-too\npc.cpp
+	"NPC.h"
+	<SFML/Graphics.hpp>
+	<iostream>
+	<random>
+	<functional>
+	<thread>
+	"AI.h"
+
+1462732465 c:\users\lenovox230\desktop\school\college\third year\first sem\179.14 projects\jewelheistrevamped2\new folder\cyborg-dreamers-too\collisiondetector.h
+	<vector>
+	<SFML/Graphics.hpp>
+	"EntitySubclass.h"
+	"NPC.h"
+
