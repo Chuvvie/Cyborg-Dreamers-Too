@@ -83,11 +83,11 @@ uint8_t** Map::printTiles()
 
 }
 
-int Map::getWidth()
+size_t Map::getWidth()
 {
     return width;
 }
-int Map::getHeight()
+size_t Map::getHeight()
 {
     return height;
 }

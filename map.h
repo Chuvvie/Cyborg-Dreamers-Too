@@ -7,7 +7,7 @@
 
 class Map {
 	private:
-		int width, height;
+		size_t width, height;
 		std::vector< std::vector<Tile*> > tiles;
 
 	public:
@@ -15,8 +15,8 @@ class Map {
 		Tile* getTile(int row, int column);
 		void drawTiles(sf::RenderWindow* window);
 		uint8_t** printTiles();
-		int getWidth();
-		int getHeight();
+		size_t getWidth();
+		size_t getHeight();
 };
 
 
