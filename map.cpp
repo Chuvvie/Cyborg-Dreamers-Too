@@ -68,6 +68,7 @@ uint8_t** Map::printTiles()
         }
     }
 
+	/*
     for(int i = 0; i <height; i++)
     {
         for(int j = 0; j < width; j++)
@@ -76,6 +77,7 @@ uint8_t** Map::printTiles()
         }
         std::cout<<std::endl;
     }
+	*/
     return passabilitymap;
 
 
