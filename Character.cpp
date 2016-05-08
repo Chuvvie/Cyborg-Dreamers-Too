@@ -13,6 +13,11 @@ void Character::setDirection(Movement m) {
     setFace(m);
     lastTic = 4;
 }
+
+Movement Character::getDirection()
+{
+    return direction;
+}
 void Character::setFace(Movement m) {
     if(m==Movement::DOWN) {
         spriteDir = 0;
