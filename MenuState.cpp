@@ -13,10 +13,16 @@ host(Button(sf::Vector2f(Universal::window_width/2.0, Universal::window_height/2
 options(Button(sf::Vector2f(Universal::window_width/2.0, Universal::window_height/2.0 + 150), sf::Vector2f(100, 20), "Options")),
 exit(Button(sf::Vector2f(Universal::window_width/2.0, Universal::window_height/2.0 + 200), sf::Vector2f(100, 20), "Exit"))
 {
-    std::cout<< "MENU STATE" <<std::endl;
+    //std::cout<< "MENU STATE" <<std::endl;
     cover = 255;
 }
+void MenuState::onActivate(const std::string& activate) {
+	isActive = true;
+}
 
+void MenuState::onDeactivate() {
+	//isActive = false;
+}
 void MenuState::update(float dt)
 {
     if(cover==0) return;
@@ -24,7 +30,7 @@ void MenuState::update(float dt)
     cover = std::max(temp, 0);
 }
 
-void MenuState::handleInput(int u, int v, const std::string& typed)
+void MenuState::handleInput(int u, int v, const std::string& typed, sf::Event e)
 {
     bool leftClick = sf::Mouse::isButtonPressed(sf::Mouse::Left);
     if(leftClick && cover > 0) {

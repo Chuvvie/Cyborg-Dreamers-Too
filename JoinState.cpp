@@ -46,7 +46,7 @@ void JoinState::update(float dt) {
     }
 }
 
-void JoinState::handleInput(int u, int v, const std::string& accept) {
+void JoinState::handleInput(int u, int v, const std::string& accept,sf::Event e) {
     bool leftClick = sf::Mouse::isButtonPressed(sf::Mouse::Left);
 
     bool upCurrentlyPressed = sf::Keyboard::isKeyPressed(sf::Keyboard::Up);

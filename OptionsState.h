@@ -1,5 +1,7 @@
-#ifndef HOSTSTATE_H_INCLUDED
-#define HOSTSTATE_H_INCLUDED
+#ifndef OPTIONSSTATE_H_INCLUDED
+#define OPTIONSSTATE_H_INCLUDED
+
+
 #include "Button.h"
 
 class StateManager;
@@ -20,7 +22,9 @@ public:
     HostState(StateManager* sm);
     void update(float dt);
     void draw(sf::RenderWindow&) const;
-    void handleInput(int u, int v, const std::string& typed, sf::Event e);
+    void handleInput(int u, int v, const std::string& typed);
 };
 
-#endif // HOSTSTATE_H_INCLUDED
+
+
+#endif // OPTIONSSTATE_H_INCLUDED

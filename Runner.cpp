@@ -38,7 +38,7 @@ int main() {
             }
         }
 
-        sm.handleInput(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y, typed);
+        sm.handleInput(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y, typed,e);
         sm.update(Universal::spf);
 
         window.clear(sf::Color::Black);

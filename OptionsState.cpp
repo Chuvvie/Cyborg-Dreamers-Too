@@ -4,7 +4,7 @@
 #include <cstdio>
 #include "StateManager.h"
 #include "HostState.h"
-
+/*
 HostState::HostState(StateManager* sm): State(sm), sm(sm),
 back(sf::Vector2f(Universal::window_width/2.0-250, Universal::window_height/2.0+250), sf::Vector2f(100, 20), "Back"),
 players1(sf::Vector2f(Universal::window_width/2.0, Universal::window_height/2.0-75), sf::Vector2f(100, 20), "Solo Game"),
@@ -26,7 +26,7 @@ void HostState::update(float dt) {
     nameInput.setString(name);
 }
 
-void HostState::handleInput(int u, int v, const std::string& accept,sf::Event e) {
+void HostState::handleInput(int u, int v, const std::string& accept) {
     Universal::appendTextInput(name, accept);
     bool leftClick = sf::Mouse::isButtonPressed(sf::Mouse::Left);
 	static bool prevLeftClick = false;
@@ -62,3 +62,4 @@ void HostState::draw(sf::RenderWindow& rw) const {
     rw.draw(nameLabel);
     rw.draw(nameInput);
 }
+*/

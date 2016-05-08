@@ -15,8 +15,10 @@ private:
     int cover;
 public:
     MenuState(StateManager* sm);
-    void handleInput(int u, int v, const std::string& typed);
+    void handleInput(int u, int v, const std::string& typed, sf::Event e);
     void update(float dt);
+    void onActivate(const std::string& accept) override;
+    void onDeactivate() override;
     void draw(sf::RenderWindow& window) const;
 };
 

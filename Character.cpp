@@ -2,7 +2,7 @@
 #include <SFML/Graphics.hpp>
 
 Character::Character(): direction(Movement::STAY), position(sf::Vector2f(144, 144)), lastTic(0), spriteDir(0), spriteAction(0) {
-    spriteSheet.loadFromFile("assets/sprites/man2.png");
+    spriteSheet.loadFromFile("assets/sprites/lady1.png");
 }
 
 void Character::setDirection(Movement m) {

@@ -8,8 +8,12 @@ struct Universal {
     static constexpr int window_height = 800;
     static constexpr float fps = 30.0;
     static constexpr float spf = 1.0/fps;
-    static constexpr float GAME_DURATION = 5.0f;
+    static constexpr float GAME_DURATION = 180.0f;
 
+    static constexpr float KEY_UP = 22;
+    static constexpr float KEY_DOWN = 18;
+    static constexpr float KEY_LEFT = 0;
+    static constexpr float KEY_RIGHT = 3;
 
     static float clamp(float var, float mini, float maxi)
     {

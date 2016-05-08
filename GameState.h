@@ -14,6 +14,21 @@
 
 //using namespace boost::asio;
 
+enum InputType
+{
+    KeyboardInput,
+    MouseInput,
+    JoystickInput
+};
+
+struct MyKeys
+{
+    InputType myInputType;
+    sf::Event::EventType myEventType;
+    int myKeyCode;
+    sf::Mouse::Button myMouseButton;
+};
+
 class GameState: public State {
 private:
     Map* map;
@@ -29,7 +44,7 @@ private:
 
 public:
 
-
+    sf::Event gameevent;
     MapGenerator generator; //new
     bool isOver = false; //new
     sf::Clock gametime;
@@ -38,13 +53,16 @@ public:
 	static const uint16_t tcpPort = 8080;
 	static const uint16_t serverListenPort = 8080;
 	static const uint16_t clientListenPort = 8181;
+    std::map<std::string,MyKeys> Keys;
+
+
 
     GameState(StateManager* sm);
     void serverLoop(size_t players);
     void clientLoop(std::string ip);
     void onActivate(const std::string& accept);
     void onDeactivate();
-    void handleInput(int u, int v, const std::string& typed);
+    void handleInput(int u, int v, const std::string& typed, sf::Event e);
     void update(float dt);
     void draw(sf::RenderWindow& window) const;
 };

@@ -14,16 +14,14 @@
 
 EndState::EndState(StateManager* sm): State(sm), sm(sm)
 {
-    //sm->
 }
 
-void EndState::handleInput(int u, int v, const std::string& typed)
+void EndState::handleInput(int u, int v, const std::string& typed,sf::Event e)
 {
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
     {
-        sm->push(1,"");
-        //sm->push(1,"");
-        // popSelf(2, "");
+       sm->push(1,"");
+       //popSelf(3,"");
     }
 
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::S))
@@ -75,7 +73,6 @@ void EndState::draw(sf::RenderWindow& window) const
     sf::Font font;
     if (!font.loadFromFile("assets/fonts/black_jack.ttf"))
     {
-        // error...
     }
     text.setFont(font); // font is a sf::Font
 

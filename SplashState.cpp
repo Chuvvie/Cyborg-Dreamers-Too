@@ -91,7 +91,7 @@ void SplashState::onDeactivate()
     logoAlpha = 0;
 }
 
-void SplashState::handleInput(int u, int v, const std::string& typed)
+void SplashState::handleInput(int u, int v, const std::string& typed,sf::Event e)
 {
     if(sf::Mouse::isButtonPressed(sf::Mouse::Left))
     {

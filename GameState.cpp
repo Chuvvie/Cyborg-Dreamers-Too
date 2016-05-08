@@ -8,7 +8,14 @@
 
 //using namespace boost::asio;
 
+
+
+ //std::map<std::string,MyKeys> Keys;
+bool TestEvent(MyKeys k, sf::Event e);
+void Shoot(void);
+void Jump(void);
 GameState::GameState(StateManager* sm): State(sm), sm(sm){
+
 
 
 
@@ -25,12 +32,48 @@ void GameState::clientLoop(std::string IP) {
 }
 
 void GameState::onActivate(const std::string& activate) {
+
+
+
+    MyKeys up;
+    // Let's bind the left mouse button to the "Shoot" action
+    up.myInputType = KeyboardInput;
+    up.myEventType = sf::Event::KeyPressed;
+    up.myKeyCode = Universal::KEY_UP;
+    Keys["Up"] = up;
+
+
+      MyKeys down;
+    // Let's bind the left mouse button to the "Shoot" action
+    down.myInputType = KeyboardInput;
+    down.myEventType = sf::Event::KeyPressed;
+    down.myKeyCode = Universal::KEY_DOWN;
+    Keys["Down"] = down;
+
+
+         MyKeys right;
+    // Let's bind the Left Control key to the "Use" action
+    right.myInputType = KeyboardInput;
+    right.myEventType = sf::Event::KeyPressed;
+    right.myKeyCode = Universal::KEY_RIGHT;
+    Keys["Right"] = right;
+      MyKeys left;
+    // Let's bind the Return key to the "Jump" action
+    left.myInputType = KeyboardInput;
+    left.myEventType = sf::Event::KeyPressed;
+    left.myKeyCode = Universal::KEY_LEFT;
+    Keys["Left"] = left;
+
+
+
+
+
+
 	isActive = true;
 	isOver = false;
 
 	std::cout<<"GAME STATE ACTIVATED" <<std::endl;
     gametime.restart();
-
     map = generator.generate(32,25,2);
      while(true)
     {
@@ -43,7 +86,11 @@ void GameState::onActivate(const std::string& activate) {
             break;
         }
     }
+    sf::Vector2f playerpos = player.getPosition();
+
     map->printTiles();
+
+    std::cout<<playerpos.x << " " << playerpos.y << std::endl;
     //set the position of the player somewhere in the map
 
 
@@ -87,12 +134,15 @@ void GameState::onDeactivate() {
     */
 }
 
-void GameState::handleInput(int u, int v, const std::string& typed) {
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
-        popSelf(1);
-    }
-      if(sf::Keyboard::isKeyPressed(sf::Keyboard::W))
+void GameState::handleInput(int u, int v, const std::string& typed,sf::Event e) {
+
+    //std::cout<<"GAME STATE ACTIVATED" <<std::endl;
+
+    if( TestEvent(Keys["Up"],e))
+
+
     {
+       // std::cout<<"GAME STATE ACTIVATED" <<std::endl;
         sf::Vector2i nextPos = player.getIndexPosition()+sf::Vector2i(0, -1);
         Tile* tile = map->getTile(nextPos.y,nextPos.x);
         if(tile->isPassable() == true)
@@ -100,7 +150,13 @@ void GameState::handleInput(int u, int v, const std::string& typed) {
         else
             player.setFace(Movement::UP);
     }
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::S))
+
+
+
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
+        popSelf(1);
+    }
+    if(TestEvent(Keys["Down"],e))
     {
         sf::Vector2i nextPos = player.getIndexPosition()+sf::Vector2i(0, 1);
         Tile* tile = map->getTile(nextPos.y,nextPos.x);
@@ -109,7 +165,7 @@ void GameState::handleInput(int u, int v, const std::string& typed) {
         else
             player.setFace(Movement::DOWN);
     }
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::A))
+    if(TestEvent(Keys["Left"],e))
     {
         sf::Vector2i nextPos = player.getIndexPosition()+sf::Vector2i(-1, 0);
         Tile* tile = map->getTile(nextPos.y,nextPos.x);
@@ -118,7 +174,7 @@ void GameState::handleInput(int u, int v, const std::string& typed) {
         else
             player.setFace(Movement::LEFT);
     }
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::D))
+    if(TestEvent(Keys["Right"],e))
     {
         sf::Vector2i nextPos = player.getIndexPosition()+sf::Vector2i(1, 0);
         Tile* tile = map->getTile(nextPos.y,nextPos.x);
@@ -161,6 +217,7 @@ void GameState::handleInput(int u, int v, const std::string& typed) {
             // sm->push(1);
         }
     }
+
 }
 
 void GameState::update(float dt) {
@@ -217,6 +274,9 @@ void GameState::update(float dt) {
 
 }
 
+
+
+
 void GameState::draw(sf::RenderWindow& window) const {
 
        sf::View minimap_view(sf::FloatRect(0,0, window.getSize().x,window.getSize().y));
@@ -247,5 +307,39 @@ void GameState::draw(sf::RenderWindow& window) const {
     player.draw(window);
 
 }
+bool TestEvent(MyKeys k, sf::Event e)
+{
+/*
+  std::cout<<"INPUT TYPE: " << KeyboardInput<< " " << k.myInputType<< std::endl;
+     std::cout<<"EVENT TYPE: " << e.type +1 << " " << k.myEventType<<std::endl;
+      std::cout<<"KEY CODE: " << e.key.code -97<<" " << k.myKeyCode << std::endl;
 
+  std::cout<<"INPUT TYPE: " << k.myInputType + 1<<std::endl;
+     std::cout<<"EVENT TYPE: " << e.type +1 <<std::endl;
+      std::cout<<"KEY CODE: " << e.key.code -97<<std::endl;
+*/
+
+
+
+
+    // Keyboard event
+    if ((k.myInputType) == KeyboardInput &&
+        (k.myEventType -1) == e.type &&
+        (k.myKeyCode +97) == e.key.code)
+    {
+        return (true);
+    }
+    return (false);
+}
+
+
+void Shoot(void)
+{
+    std::cout << "Shoot !" << std::endl;
+}
+
+void Jump(void)
+{
+    std::cout << "Jump !" << std::endl;
+}
 
