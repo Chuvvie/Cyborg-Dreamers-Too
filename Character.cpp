@@ -79,7 +79,7 @@ sf::Vector2f Character::getPosition() {
     return position;
 }
 sf::Vector2f Character::setPosition(sf::Vector2f pos) {
-     position = pos;
+    return position = pos;
 }
 
 
