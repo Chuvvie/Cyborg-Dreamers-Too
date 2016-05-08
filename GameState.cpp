@@ -126,6 +126,8 @@ void GameState::onActivate(const std::string& activate) {
 		std::string username = "";
 		while (ss >> current)
 			username += current + " ";
+		if (username.length() > 0)
+			username = username.substr(0, username.length()-1);
 
 		networkThread = new std::thread(&GameState::serverLoop, this, players, username);
 	}
@@ -138,6 +140,8 @@ void GameState::onActivate(const std::string& activate) {
 		std::string username = "";
 		while (ss >> current)
 			username += current + " ";
+		if (username.length() > 0)
+			username = username.substr(0, username.length() - 1);
 
 		networkThread = new std::thread(&GameState::clientLoop, this, ipAddress, username);
 	}

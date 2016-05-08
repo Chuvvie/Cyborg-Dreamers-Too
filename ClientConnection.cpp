@@ -86,7 +86,9 @@ void ClientConnection::interpretData() {
 			std::string temp;
 			while (ss >> temp)
 				username += temp + " ";
-			
+			if (username.length() > 0)
+				username = username.substr(0, username.length() - 1);
+
 			std::cout << "Confirmed to be: " << username << " with id of " << (int)id << std::endl;
 
 			std::string toSend = "";
