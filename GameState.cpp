@@ -14,7 +14,26 @@
 bool TestEvent(MyKeys k, sf::Event e);
 void Shoot(void);
 void Jump(void);
-GameState::GameState(StateManager* sm): State(sm), sm(sm){
+
+//npc starting positions;
+void positionRandomizer (NPC& n, Map* mape)
+{
+    int ab = rand()% 5 + 1;
+    n.setCostume(ab);
+    while(true)
+    {
+        int XPOS = rand() % (mape->getWidth()-1) + 1;
+        int YPOS = rand() % (mape->getHeight()-1) + 1;
+        //the position should be in a free tile
+        if(mape->getTile(YPOS,XPOS)->getType() == 0)
+        {
+           n.setPosition(sf::Vector2f(XPOS*32+16,YPOS*32+16));
+           break;
+        }
+    }
+}
+
+GameState::GameState(StateManager* sm): State(sm), sm(sm),  hud(&player){
 
 
 
@@ -31,9 +50,9 @@ void GameState::clientLoop(std::string IP) {
 
 }
 
-void GameState::onActivate(const std::string& activate) {
+void GameState::onActivate(const std::string& activate){
 
-
+    srand(time(NULL));
 
     MyKeys up;
     // Let's bind the left mouse button to the "Shoot" action
@@ -64,11 +83,6 @@ void GameState::onActivate(const std::string& activate) {
     left.myKeyCode = Universal::KEY_LEFT;
     Keys["Left"] = left;
 
-
-
-
-
-
 	isActive = true;
 	isOver = false;
 
@@ -89,6 +103,24 @@ void GameState::onActivate(const std::string& activate) {
     sf::Vector2f playerpos = player.getPosition();
 
     map->printTiles();
+
+    curly.setMap(*map);
+    larry.setMap(*map);
+    moe.setMap(*map);
+    tom.setMap(*map);
+    dick.setMap(*map);
+
+    positionRandomizer(curly, map);
+    positionRandomizer(larry, map);
+    positionRandomizer(moe, map);
+    positionRandomizer(tom, map);
+    positionRandomizer(dick, map);
+
+    cd.addNPC(curly);
+    cd.addNPC(larry);
+    cd.addNPC(moe);
+    cd.addNPC(tom);
+    cd.addNPC(dick);
 
     std::cout<<playerpos.x << " " << playerpos.y << std::endl;
     //set the position of the player somewhere in the map
@@ -153,7 +185,7 @@ void GameState::handleInput(int u, int v, const std::string& typed,sf::Event e) 
 
 
 
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)){
         popSelf(1);
     }
     if(TestEvent(Keys["Down"],e))
@@ -214,7 +246,12 @@ void GameState::handleInput(int u, int v, const std::string& typed,sf::Event e) 
         {
             tile ->setColor(sf::Color::Red);
             tile ->setType(4);
+            hud.jewelInc();
             // sm->push(1);
+        }
+        else
+        {
+            hud.hasFired();
         }
     }
 
@@ -233,7 +270,14 @@ void GameState::update(float dt) {
     }
 
     player.update(dt);
-
+    hud.update(dt);
+    curly.update(dt);
+    larry.update(dt);
+    moe.update(dt);
+    tom.update(dt);
+    dick.update(dt);
+    cd.checkNPCCollisions();
+    cd.checkPlayerCollisions(&player);
 
     //End condition #2. If all the jewels are taken, end.
     /*
@@ -304,7 +348,14 @@ void GameState::draw(sf::RenderWindow& window) const {
     map->drawTiles(&window);
     window.setView(minimap_view);
     map->drawTiles(&window);
+    window.setView(window.getDefaultView());
+    hud.draw(window);
     player.draw(window);
+    curly.draw(window);
+    larry.draw(window);
+    moe.draw(window);
+    tom.draw(window);
+    dick.draw(window);
 
 }
 bool TestEvent(MyKeys k, sf::Event e)

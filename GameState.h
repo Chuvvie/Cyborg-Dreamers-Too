@@ -5,10 +5,13 @@
 #include <map>
 #include <set>
 #include <string>
-#include <mutex>
+//#include <mutex>
 #include "State.h"
+#include "HUD.h"
+#include "NPC.h"
 #include "EntitySubclass.h"
 #include "map.h"
+#include "CollisionDetector.h"
 #include <vector>
 #include "mapgenerator.h"
 
@@ -37,11 +40,21 @@ private:
 	//io_service service;
     bool isActive;
     bool isHost;
-	std::thread* clientThread;
-	std::thread* serverThread;
+//	std::thread* clientThread;
+//	std::thread* serverThread;
 
 	//friend class ClientSide;
 
+	//NPCs
+	NPC curly;
+	NPC larry;
+	NPC moe;
+	NPC tom;
+	NPC dick;
+
+	CollisionDetector cd;
+
+	HUD hud;
 public:
 
     sf::Event gameevent;
