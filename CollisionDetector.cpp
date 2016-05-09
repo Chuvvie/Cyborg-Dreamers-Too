@@ -32,21 +32,24 @@ void CollisionDetector::checkNPCCollisions()
 
 void CollisionDetector::checkPlayerCollisions(Character *c, sf::Vector2f next)
 {
+    int ctr = 0;
     sf::IntRect chars(c->getPosition().x + next.x, c->getPosition().y + next.y, 32, 32);
     for (std::vector<NPC*>::iterator i = npcs.begin(); i != npcs.end(); ++i) {
             sf::IntRect npc1((*i)->getPosition().x, (*i)->getPosition().y, 32, 32);
             if(chars.intersects(npc1))
             {
-               c->isCollidingNow();
-               (*i)->isCollidingNow();
-
-               std::cout << "colliding!" <<std::endl;
-            }
-            else
-            {
-                c->isNotColliding();
-                (*i)->isNotColliding();
-                //std::cout << "not colliding!" <<std::endl;
+                ctr++;
+                (*i)->isCollidingNow();
             }
 	}
+	if(ctr > 0)
+    {
+        c->isCollidingNow();
+        std::cout << "colliding!" <<std::endl;
+    }
+    else
+    {
+
+        c->isNotColliding();
+    }
 }
