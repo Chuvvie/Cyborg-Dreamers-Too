@@ -16,6 +16,7 @@ protected:
     int spriteDir;
     int spriteAction;
     bool isColliding;
+    int currentCostume;
 public:
     Character();
     void update(float dt);
@@ -30,6 +31,9 @@ public:
     void isCollidingNow();
     void isNotColliding();
     bool colliding();
+    void setCostume(int);
+    void changeCostume();
+    int getCostume();
     sf::Vector2i getSprite();
 };
 
