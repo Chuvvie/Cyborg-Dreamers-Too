@@ -276,6 +276,11 @@ void GameState::handleInput(int u, int v, const std::string& typed,sf::Event e) 
             hud.hasFired();
         }
     }
+    if(sf::Keyboard::isKeyPressed((sf::Keyboard::LShift)))
+    {
+        std::cout << player.getCostume() <<std::endl;
+        player.changeCostume();
+    }
 
 }
 
