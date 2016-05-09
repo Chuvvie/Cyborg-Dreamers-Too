@@ -3,6 +3,7 @@
 #include "Entity.h"
 #include "map.h"
 #include "NPC.h"
+#include "Jewel.h"
 
 class Character: public Entity {
 private:
@@ -13,15 +14,19 @@ protected:
     Movement direction;
     sf::Texture spriteSheet;
     int lastTic;
-
     int spriteDir;
     int spriteAction;
     bool isColliding;
     int currentCostume;
-    NPC* target;
+    Entity* target;
+    bool isAlive = true;
+    std::vector<Jewel*> jewels;
 public:
     Character();
     void update(float dt);
+    void addJewel(Jewel *jewel);
+    int getJewels();
+    void loseJewels();
     void draw(sf::RenderWindow& window) const;
     void setDirection(Movement m);
     void setFace(Movement m);
@@ -36,9 +41,12 @@ public:
     void setCostume(int);
     void changeCostume();
     int getCostume();
-    void setTarget(NPC*);
+    bool getAlive();
+    void setDead();
+    void setTarget(Entity*);
     void kill();
     sf::Vector2i getSprite();
+    int getType();
 };
 
 #endif // ENTITYSUBCLASS_H_INCLUDED

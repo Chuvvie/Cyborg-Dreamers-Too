@@ -2,8 +2,10 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 
+
 Character::Character(): direction(Movement::STAY), position(sf::Vector2f(144, 144)), lastTic(0), spriteDir(0), spriteAction(0) {
     spriteSheet.loadFromFile("assets/sprites/lady1.png");
+    isCharacter = true;
 }
 
 void Character::setDirection(Movement m) {
@@ -14,7 +16,22 @@ void Character::setDirection(Movement m) {
     setFace(m);
     lastTic = 4;
 }
-void Character::setTarget(NPC* thispc)
+
+void Character::addJewel(Jewel* jewel)
+{
+    jewels.emplace_back(&*jewel);
+}
+
+int Character::getJewels()
+{
+    return jewels.size();
+}
+
+void Character::loseJewels()
+{
+    jewels.clear();
+}
+void Character::setTarget(Entity* thispc)
 {
     target = thispc;
 }
@@ -22,10 +39,24 @@ void Character::kill()
 {
     if(target != nullptr) this->target->setDead();
 }
+int Character::getType()
+{
+    return 1;
+}
 
 void Character::isCollidingNow()
 {
     isColliding = true;
+}
+
+bool Character::getAlive()
+{
+    return isAlive;
+}
+
+void Character::setDead()
+{
+    isAlive = false;
 }
 
 void Character::isNotColliding()
@@ -140,7 +171,7 @@ sf::Vector2f Character::getPosition() {
     return position;
 }
 sf::Vector2f Character::setPosition(sf::Vector2f pos) {
-     position = pos;
+    return position = pos;
 }
 
 sf::Vector2i Character::getSprite()
