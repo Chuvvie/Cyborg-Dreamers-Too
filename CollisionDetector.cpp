@@ -40,6 +40,13 @@ void CollisionDetector::checkPlayerCollisions(Character *c, sf::Vector2f next)
             {
                 ctr++;
                 (*i)->isCollidingNow();
+                std::cout << (*i)->getCostume() <<std::endl;
+                c->setCostume((*i)->getCostume());
+                break;
+            }
+            else
+            {
+                c->setCostume(0);
             }
 	}
 	if(ctr > 0)
