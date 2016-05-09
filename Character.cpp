@@ -14,6 +14,19 @@ void Character::setDirection(Movement m) {
     lastTic = 4;
 }
 
+void Character::isCollidingNow()
+{
+    isColliding = true;
+}
+
+void Character::isNotColliding()
+{
+    isColliding = false;
+}
+bool Character::colliding()
+{
+    return isColliding;
+}
 Movement Character::getDirection()
 {
     return direction;
@@ -85,6 +98,11 @@ sf::Vector2f Character::getPosition() {
 }
 sf::Vector2f Character::setPosition(sf::Vector2f pos) {
      position = pos;
+}
+
+sf::Vector2i Character::getSprite()
+{
+    return sf::Vector2i(spriteAction, spriteDir);
 }
 
 
