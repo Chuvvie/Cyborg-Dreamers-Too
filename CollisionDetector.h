@@ -10,9 +10,10 @@ class CollisionDetector
 {
 private:
     std::vector<NPC*> npcs;
+    std::vector<Character*c> chars;
 public:
-    void addNPC(NPC npc);
-    void checkPlayerCollisions(Character *c);
+    void addNPC(NPC* npc);
+    void checkPlayerCollisions(Character *c, sf::Vector2f next);
     void checkNPCCollisions();
 };
 
