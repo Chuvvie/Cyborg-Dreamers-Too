@@ -12,7 +12,7 @@ protected:
     int spriteAction;
     int ctr = 0;
     int currentCostume;
-    bool isColliding;
+    bool isColliding = false;
     bool isAlive = true;
 public:
     sf::Vector2f position;
@@ -36,7 +36,9 @@ public:
     bool getAlive();
     void setDead();
     bool colliding();
+    void setTarget(Entity*){};
     sf::Vector2i getSprite();
     int getCostume();
+    int getType();
 };
 #endif // NPC_H_INCLUDED

@@ -47,7 +47,13 @@ sf::Vector2i NPC::getSprite()
     return sf::Vector2i(spriteAction, spriteDir);
 }
 
+int NPC::getType()
+{
+    return 2;
+}
+
 NPC::NPC(): direction(Movement::STAY), lastTic(0), spriteDir(0), spriteAction(0){
+    isNPC = true;
 }
 
 int NPC::getCostume()
@@ -114,10 +120,15 @@ void NPC::update(float dt)
 {
     if(this->getAlive())
     {
-        ai.moveNow(this, &map2);
         if(this->colliding() == true)
         {
+            //std::cout << "has collided!" << std::endl;
             this->setFace(this->getDirection());
+        }
+        else
+        {
+            //std::cout << "moving!" << std::endl;
+            ai.moveNow(this, &map2);
         }
 
         if(lastTic>0) {
