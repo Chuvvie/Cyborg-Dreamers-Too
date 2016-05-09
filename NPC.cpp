@@ -98,6 +98,10 @@ void NPC::setFace(Movement m) {
 void NPC::update(float dt)
 {
     ai.moveNow(this, &map2);
+    if(this->colliding() == true)
+    {
+        this->setFace(this->getDirection());
+    }
 
     if(lastTic>0) {
         lastTic--;

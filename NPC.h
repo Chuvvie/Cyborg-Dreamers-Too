@@ -11,6 +11,7 @@ protected:
     int spriteDir;
     int spriteAction;
     int ctr = 0;
+    int currentCostume;
     bool isColliding;
 public:
     sf::Vector2f position;
