@@ -13,6 +13,7 @@ private:
     std::vector<Character*> chars;
 public:
     void addNPC(NPC* npc);
+    void addCharacter(Character* c);
     void checkPlayerCollisions(Character *c, sf::Vector2f next);
     void checkNPCCollisions();
     bool breaker = false;

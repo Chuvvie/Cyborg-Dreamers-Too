@@ -9,6 +9,11 @@ void CollisionDetector::addNPC(NPC* npc)
     npcs.push_back(npc);
 }
 
+void CollisionDetector::addCharacter(Character *c)
+{
+    chars.push_back(c);
+}
+
 void CollisionDetector::checkNPCCollisions()
 {
     for (std::vector<NPC*>::iterator i = npcs.begin(); i != npcs.end(); ++i) {
@@ -42,11 +47,13 @@ void CollisionDetector::checkPlayerCollisions(Character *c, sf::Vector2f next)
                 (*i)->isCollidingNow();
                 std::cout << (*i)->getCostume() <<std::endl;
                 c->setCostume((*i)->getCostume());
+                c->setTarget((*i));
                 break;
             }
             else
             {
                 c->setCostume(0);
+                c->setTarget(nullptr);
             }
 	}
 	if(ctr > 0)
@@ -56,7 +63,6 @@ void CollisionDetector::checkPlayerCollisions(Character *c, sf::Vector2f next)
     }
     else
     {
-
         c->isNotColliding();
     }
 }
