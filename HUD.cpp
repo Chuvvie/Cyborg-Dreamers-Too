@@ -46,7 +46,7 @@ HUD::HUD(Character *c): c(c)
     timer.setPosition(sf::Vector2f(Universal::window_width/2, 0));
     timer.setFont(font);
     timer.setString(updater);
-    timer.setColor(sf::Color::White);
+    timer.setColor(sf::Color::Red);
 
     std::cout << "HUD LOADED" << std::endl;
 
@@ -81,7 +81,7 @@ void HUD::update(float dt)
     tens = (int) (total_time - (minute * 60))/10;
     ones = (int) total_time - (int)(total_time/10)*10;
     updater = std::to_string(minute) + ":" + std::to_string(tens) + std::to_string(ones);
-    jewels.setString("x" + std::to_string(jewelctr));
+    jewels.setString("x" + std::to_string(c->getJewels()));
     //updater = "sadasddsadasdsad";
     if(isFired)
     {
@@ -98,11 +98,6 @@ void HUD::update(float dt)
         weapon.setFillColor(sf::Color(sf::Color::Green));
     }
     timer.setString(updater);
-}
-
-void HUD::jewelInc()
-{
-    jewelctr++;
 }
 
 void HUD::hasFired()
