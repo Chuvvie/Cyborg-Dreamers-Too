@@ -122,6 +122,12 @@ void GameState::onActivate(const std::string& activate){
     cd.addNPC(&tom);
     cd.addNPC(&dick);
 
+    npc.push_back(&curly);
+    npc.push_back(&larry);
+    npc.push_back(&moe);
+    npc.push_back(&tom);
+    npc.push_back(&dick);
+
     std::cout<<playerpos.x << " " << playerpos.y << std::endl;
     //set the position of the player somewhere in the map
 
@@ -274,6 +280,7 @@ void GameState::handleInput(int u, int v, const std::string& typed,sf::Event e) 
         else
         {
             hud.hasFired();
+            player.kill();
         }
     }
     if(sf::Keyboard::isKeyPressed((sf::Keyboard::LShift)))
@@ -299,10 +306,10 @@ void GameState::update(float dt) {
     player.update(dt);
     hud.update(dt);
     curly.update(dt);
-    //larry.update(dt);
-    //moe.update(dt);
-    //tom.update(dt);
-    //dick.update(dt);
+    larry.update(dt);
+    moe.update(dt);
+    tom.update(dt);
+    dick.update(dt);
     cd.checkNPCCollisions();
 
     //End condition #2. If all the jewels are taken, end.
@@ -377,11 +384,16 @@ void GameState::draw(sf::RenderWindow& window) const {
     window.setView(window.getDefaultView());
     hud.draw(window);
     player.draw(window);
+    /*
     curly.draw(window);
     larry.draw(window);
     moe.draw(window);
     tom.draw(window);
     dick.draw(window);
+    */
+    for (std::vector<NPC*>::const_iterator i = npc.begin(); i != npc.end(); ++i) {
+        (*i)->draw(window);
+    }
 
 }
 bool TestEvent(MyKeys k, sf::Event e)

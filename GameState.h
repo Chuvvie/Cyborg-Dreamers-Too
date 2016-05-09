@@ -52,6 +52,9 @@ private:
 	NPC tom;
 	NPC dick;
 
+	std::vector<NPC*> npc;
+	std::vector<Character*> players;
+
 	CollisionDetector cd;
 
 	HUD hud;
