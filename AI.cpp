@@ -11,7 +11,7 @@ void AI::moveNow(NPC *npc, Map* map)
     float nextmove = clock3.getElapsedTime().asSeconds();
     if(nextmove >= 1)
     {
-        willMoveNow = rand() % 10 + 1;
+        willMoveNow = rand() % 7 + 1;
         clock3.restart();
     }
     else
