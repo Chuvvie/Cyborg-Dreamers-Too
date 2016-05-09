@@ -116,11 +116,11 @@ void GameState::onActivate(const std::string& activate){
     positionRandomizer(tom, map);
     positionRandomizer(dick, map);
 
-    cd.addNPC(curly);
-    cd.addNPC(larry);
-    cd.addNPC(moe);
-    cd.addNPC(tom);
-    cd.addNPC(dick);
+    cd.addNPC(&curly);
+    cd.addNPC(&larry);
+    cd.addNPC(&moe);
+    cd.addNPC(&tom);
+    cd.addNPC(&dick);
 
     std::cout<<playerpos.x << " " << playerpos.y << std::endl;
     //set the position of the player somewhere in the map
@@ -171,16 +171,28 @@ void GameState::handleInput(int u, int v, const std::string& typed,sf::Event e) 
     //std::cout<<"GAME STATE ACTIVATED" <<std::endl;
 
     if( TestEvent(Keys["Up"],e))
-
-
     {
        // std::cout<<"GAME STATE ACTIVATED" <<std::endl;
         sf::Vector2i nextPos = player.getIndexPosition()+sf::Vector2i(0, -1);
         Tile* tile = map->getTile(nextPos.y,nextPos.x);
-        if(tile->isPassable() == true)
+        if(player.colliding() == true) player.setFace(Movement::UP);
+        std::cout << player.colliding() <<std::endl;
+        cd.checkPlayerCollisions(&player, sf::Vector2f(0, -4));
+        if(tile->isPassable() == true && player.colliding() == false)
+        {
             player.setDirection(Movement::UP);
-        else
+        }
+        else if (player.colliding() == true)
+        {
             player.setFace(Movement::UP);
+            player.setPosition(player.getPosition());
+            std::cout << "collided! with NPC" << std::endl;
+        }
+        else if (tile->isPassable() == false)
+        {
+            player.setFace(Movement::UP);
+            std::cout << "collided! with wall" << std::endl;
+        }
     }
 
 
@@ -192,28 +204,70 @@ void GameState::handleInput(int u, int v, const std::string& typed,sf::Event e) 
     {
         sf::Vector2i nextPos = player.getIndexPosition()+sf::Vector2i(0, 1);
         Tile* tile = map->getTile(nextPos.y,nextPos.x);
-        if(tile->isPassable() == true)
+        if(player.colliding() == true) player.setFace(Movement::DOWN);
+        std::cout << player.colliding() <<std::endl;
+        cd.checkPlayerCollisions(&player, sf::Vector2f(0, 4));
+        if(tile->isPassable() == true && player.colliding() == false)
+        {
             player.setDirection(Movement::DOWN);
-        else
+        }
+        else if (player.colliding() == true)
+        {
             player.setFace(Movement::DOWN);
+            player.setPosition(player.getPosition());
+            std::cout << "collided! with NPC" << std::endl;
+        }
+        else if (tile->isPassable() == false)
+        {
+            player.setFace(Movement::DOWN);
+            std::cout << "collided! with wall" << std::endl;
+        }
     }
     if(TestEvent(Keys["Left"],e))
     {
         sf::Vector2i nextPos = player.getIndexPosition()+sf::Vector2i(-1, 0);
         Tile* tile = map->getTile(nextPos.y,nextPos.x);
-        if(tile->isPassable() == true)
+        if(player.colliding() == true) player.setFace(Movement::LEFT);
+        std::cout << player.colliding() <<std::endl;
+        cd.checkPlayerCollisions(&player, sf::Vector2f(-4, 0));
+        if(tile->isPassable() == true && player.colliding() == false)
+        {
             player.setDirection(Movement::LEFT);
-        else
+        }
+        else if (player.colliding() == true)
+        {
             player.setFace(Movement::LEFT);
+            player.setPosition(player.getPosition());
+            std::cout << "collided! with NPC" << std::endl;
+        }
+        else if (tile->isPassable() == false)
+        {
+            player.setFace(Movement::LEFT);
+            std::cout << "collided! with wall" << std::endl;
+        }
     }
     if(TestEvent(Keys["Right"],e))
     {
         sf::Vector2i nextPos = player.getIndexPosition()+sf::Vector2i(1, 0);
         Tile* tile = map->getTile(nextPos.y,nextPos.x);
-        if(tile->isPassable() == true)
+        if(player.colliding() == true) player.setFace(Movement::RIGHT);
+        std::cout << player.colliding() <<std::endl;
+        cd.checkPlayerCollisions(&player, sf::Vector2f(4, 0));
+        if(tile->isPassable() == true && player.colliding() == false)
+        {
             player.setDirection(Movement::RIGHT);
-        else
+        }
+        else if (player.colliding() == true)
+        {
             player.setFace(Movement::RIGHT);
+            player.setPosition(player.getPosition());
+            std::cout << "collided! with NPC" << std::endl;
+        }
+        else if (tile->isPassable() == false)
+        {
+            player.setFace(Movement::RIGHT);
+            std::cout << "collided! with wall" << std::endl;
+        }
     }
     if(sf::Keyboard::isKeyPressed((sf::Keyboard::Space)))
     {
@@ -272,12 +326,14 @@ void GameState::update(float dt) {
     player.update(dt);
     hud.update(dt);
     curly.update(dt);
-    larry.update(dt);
-    moe.update(dt);
-    tom.update(dt);
-    dick.update(dt);
+    //larry.update(dt);
+    //moe.update(dt);
+    //tom.update(dt);
+    //dick.update(dt);
     cd.checkNPCCollisions();
-    cd.checkPlayerCollisions(&player);
+     cd.checkPlayerCollisions(&player, sf::Vector2f(0, 4));
+     cd.checkPlayerCollisions(&player, sf::Vector2f(-4, 0));
+     cd.checkPlayerCollisions(&player, sf::Vector2f(4, 0));
 
     //End condition #2. If all the jewels are taken, end.
     /*
