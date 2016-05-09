@@ -14,6 +14,7 @@
 #include "CollisionDetector.h"
 #include <vector>
 #include "mapgenerator.h"
+#include "Jewel.h"
 
 //using namespace boost::asio;
 
@@ -52,8 +53,7 @@ private:
 	NPC tom;
 	NPC dick;
 
-	std::vector<NPC*> npc;
-	std::vector<Character*> players;
+	std::vector<Entity*> entities;
 
 	CollisionDetector cd;
 

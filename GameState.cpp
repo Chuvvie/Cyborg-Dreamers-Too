@@ -3,6 +3,7 @@
 #include <sstream>
 #include <cassert>
 #include "Universal.h"
+#include "Jewel.h"
 //#include "Message.h"
 //#include "TCPServer.h"
 
@@ -33,12 +34,25 @@ void positionRandomizer (NPC& n, Map* mape)
     }
 }
 
+void jewelLoader (std::vector<Entity*> &a, CollisionDetector* cd, Map* mape)
+{
+    for(int j = 1; j < 25; ++j)
+    {
+        for(int i = 1; i < 32; ++i)
+        {
+            Tile* tile = mape->getTile(j, i);
+            if(tile->getType() == 2)
+            {
+                tile->setColor(sf::Color::Black);
+                a.emplace_back(new Jewel(sf::Vector2f(i * 32 + 16, j * 32 + 16)));
+                cd->addEntity(new Jewel(sf::Vector2f(i * 32 + 16, j * 32 + 16)));
+            }
+        }
+    }
+}
+
+
 GameState::GameState(StateManager* sm): State(sm), sm(sm),  hud(&player){
-
-
-
-
-
 
 }
 
@@ -104,29 +118,37 @@ void GameState::onActivate(const std::string& activate){
 
     map->printTiles();
 
+    //JEWEL LOADER
+    jewelLoader(entities, &cd, map);
+    std::cout << "DONE LOADING JEWELS" <<std::endl;
+
+    //MAP SETTING
     curly.setMap(*map);
     larry.setMap(*map);
     moe.setMap(*map);
     tom.setMap(*map);
     dick.setMap(*map);
 
+    //SET POSITIONS
     positionRandomizer(curly, map);
     positionRandomizer(larry, map);
     positionRandomizer(moe, map);
     positionRandomizer(tom, map);
     positionRandomizer(dick, map);
 
-    cd.addNPC(&curly);
-    cd.addNPC(&larry);
-    cd.addNPC(&moe);
-    cd.addNPC(&tom);
-    cd.addNPC(&dick);
+    cd.addEntity(&player);
+    cd.addEntity(&curly);
+    cd.addEntity(&larry);
+    cd.addEntity(&moe);
+    cd.addEntity(&tom);
+    cd.addEntity(&dick);
 
-    npc.push_back(&curly);
-    npc.push_back(&larry);
-    npc.push_back(&moe);
-    npc.push_back(&tom);
-    npc.push_back(&dick);
+    entities.push_back(&player);
+    entities.push_back(&curly);
+    entities.push_back(&larry);
+    entities.push_back(&moe);
+    entities.push_back(&tom);
+    entities.push_back(&dick);
 
     std::cout<<playerpos.x << " " << playerpos.y << std::endl;
     //set the position of the player somewhere in the map
@@ -180,7 +202,7 @@ void GameState::handleInput(int u, int v, const std::string& typed,sf::Event e) 
     {
        // std::cout<<"GAME STATE ACTIVATED" <<std::endl;
         sf::Vector2i nextPos = player.getIndexPosition()+sf::Vector2i(0, -1);
-        cd.checkPlayerCollisions(&player, sf::Vector2f(0, -7));
+        //cd.checkEntityCollisions(&player, sf::Vector2f(0, -7));
         Tile* tile = map->getTile(nextPos.y,nextPos.x);
         if(tile->isPassable() == true)
         {
@@ -201,7 +223,7 @@ void GameState::handleInput(int u, int v, const std::string& typed,sf::Event e) 
     if(TestEvent(Keys["Down"],e))
     {
         sf::Vector2i nextPos = player.getIndexPosition()+sf::Vector2i(0, 1);
-        cd.checkPlayerCollisions(&player, sf::Vector2f(0, 7));
+        //cd.checkEntityCollisions(&player, sf::Vector2f(0, 7));
         Tile* tile = map->getTile(nextPos.y,nextPos.x);
         if(tile->isPassable() == true)
         {
@@ -216,7 +238,7 @@ void GameState::handleInput(int u, int v, const std::string& typed,sf::Event e) 
     if(TestEvent(Keys["Left"],e))
     {
         sf::Vector2i nextPos = player.getIndexPosition()+sf::Vector2i(-1, 0);
-        cd.checkPlayerCollisions(&player, sf::Vector2f(-7, 0));
+        //cd.checkEntityCollisions(&player, sf::Vector2f(-7, 0));
         Tile* tile = map->getTile(nextPos.y,nextPos.x);
         if(tile->isPassable() == true)
         {
@@ -231,7 +253,7 @@ void GameState::handleInput(int u, int v, const std::string& typed,sf::Event e) 
     if(TestEvent(Keys["Right"],e))
     {
         sf::Vector2i nextPos = player.getIndexPosition()+sf::Vector2i(1, 0);
-        cd.checkPlayerCollisions(&player, sf::Vector2f(0, 7));
+        //cd.checkEntityCollisions(&player, sf::Vector2f(0, 7));
         Tile* tile = map->getTile(nextPos.y,nextPos.x);
         if(tile->isPassable() == true)
         {
@@ -272,13 +294,21 @@ void GameState::handleInput(int u, int v, const std::string& typed,sf::Event e) 
         Tile* tile = map->getTile(nextPos.y,nextPos.x);
         if(tile->getType() == 2)
         {
-            tile ->setColor(sf::Color::Red);
-            tile ->setType(4);
-            hud.jewelInc();
+            tile ->setColor(sf::Color::Black);
+            //tile ->setType(4);
+            //hud.jewelInc();
+            for (std::vector<Entity*>::const_iterator i = entities.begin(); i != entities.end(); ++i) {
+                if((*i)->getType() == 3 && (*i)->getIndexPosition() == nextPos)
+                {
+                    (*i)->setDead();
+                    player.addJewel(dynamic_cast<Jewel*>(*i));
+                }
+            }
             // sm->push(1);
         }
-        else
+        else if(tile->getType() != 2 && hud.wasUsed() == false)
         {
+            std::cout << tile->getType() <<std::endl;
             hud.hasFired();
             player.kill();
         }
@@ -287,6 +317,15 @@ void GameState::handleInput(int u, int v, const std::string& typed,sf::Event e) 
     {
         std::cout << player.getCostume() <<std::endl;
         player.changeCostume();
+        //testing for death jewels
+        player.loseJewels();
+        for (std::vector<Entity*>::const_iterator i = entities.begin(); i != entities.end(); ++i) {
+                if((*i)->getType() == 3 && (*i)->getAlive() == false)
+                {
+                    (*i)->reSet();
+                }
+            }
+
     }
 
 }
@@ -302,15 +341,23 @@ void GameState::update(float dt) {
       std::cout<<"TIME UP"<<std::endl;
         isOver = true;
     }
-
+    /*
     player.update(dt);
-    hud.update(dt);
     curly.update(dt);
     larry.update(dt);
     moe.update(dt);
     tom.update(dt);
     dick.update(dt);
-    cd.checkNPCCollisions();
+    */
+
+    for (std::vector<Entity*>::const_iterator i = entities.begin(); i != entities.end(); ++i) {
+        (*i)->update(dt);
+    }
+    hud.update(dt);
+    for (std::vector<Entity*>::const_iterator i = entities.begin(); i != entities.end(); ++i) {
+        cd.checkEntityCollisions((*i));
+    }
+
 
     //End condition #2. If all the jewels are taken, end.
     /*
@@ -391,10 +438,9 @@ void GameState::draw(sf::RenderWindow& window) const {
     tom.draw(window);
     dick.draw(window);
     */
-    for (std::vector<NPC*>::const_iterator i = npc.begin(); i != npc.end(); ++i) {
+    for (std::vector<Entity*>::const_iterator i = entities.begin(); i != entities.end(); ++i) {
         (*i)->draw(window);
     }
-
 }
 bool TestEvent(MyKeys k, sf::Event e)
 {
