@@ -11,6 +11,7 @@ protected:
     int spriteDir;
     int spriteAction;
     int ctr = 0;
+    bool isColliding;
 public:
     sf::Vector2f position;
     void update(float);
@@ -29,5 +30,9 @@ public:
     void setPosition(sf::Vector2f add);
     void setPositionFix(sf::Vector2f tis);
     void printDirection();
+    void isCollidingNow();
+    void isNotColliding();
+    bool colliding();
+    sf::Vector2i getSprite();
 };
 #endif // NPC_H_INCLUDED

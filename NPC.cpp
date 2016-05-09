@@ -27,7 +27,25 @@ void NPC::randomCommand()
     }
 }
 
+void NPC::isCollidingNow()
+{
+    isColliding = true;
+}
 
+void NPC::isNotColliding()
+{
+    isColliding = false;
+}
+
+bool NPC::colliding()
+{
+    return isColliding;
+}
+
+sf::Vector2i NPC::getSprite()
+{
+    return sf::Vector2i(spriteAction, spriteDir);
+}
 
 NPC::NPC(): direction(Movement::STAY), lastTic(0), spriteDir(0), spriteAction(0){
 }
@@ -79,8 +97,7 @@ void NPC::setFace(Movement m) {
 
 void NPC::update(float dt)
 {
-    randomCommand();
-    ai.moveNow(this, &map2, command);
+    ai.moveNow(this, &map2);
 
     if(lastTic>0) {
         lastTic--;
