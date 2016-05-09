@@ -5,18 +5,21 @@
 #include <SFML/Graphics.hpp>
 #include "EntitySubclass.h"
 #include "NPC.h"
+#include "Entity.h"
+
 
 class CollisionDetector
 {
 private:
     std::vector<NPC*> npcs;
     std::vector<Character*> chars;
+    std::vector<Entity*> entities;
 public:
     void addNPC(NPC* npc);
     void addCharacter(Character* c);
-    void checkPlayerCollisions(Character *c, sf::Vector2f next);
+    void addEntity(Entity *e);
+    void checkEntityCollisions(Entity *c);
     void checkNPCCollisions();
-    bool breaker = false;
 };
 
 #endif // COLLISIONDETECTOR_H_INCLUDED
