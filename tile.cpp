@@ -35,7 +35,8 @@ void Tile::setType(int type) {
     }
 	else if (type == 2) {
 		this->passability = false;
-		this->shape.setFillColor(sf::Color::Yellow);
+		//this->shape.setFillColor(sf::Color::Yellow);
+		this->shape.setFillColor(sf::Color::Black);
 	}
 	else if (type == 3) {
 		this->passability = true;
@@ -43,7 +44,7 @@ void Tile::setType(int type) {
 	}
 	else if (type == 4) {
 		this->passability = false;
-		this->shape.setFillColor(sf::Color::Red);
+		this->shape.setFillColor(sf::Color::Black);
 	}
 }
 
