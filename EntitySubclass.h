@@ -15,6 +15,7 @@ protected:
 
     int spriteDir;
     int spriteAction;
+    bool isColliding;
 public:
     Character();
     void update(float dt);
@@ -26,6 +27,10 @@ public:
     sf::Vector2f getPosition();
     sf::Vector2f setPosition(sf::Vector2f pos);
     Movement getDirection();
+    void isCollidingNow();
+    void isNotColliding();
+    bool colliding();
+    sf::Vector2i getSprite();
 };
 
 #endif // ENTITYSUBCLASS_H_INCLUDED
