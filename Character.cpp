@@ -47,6 +47,34 @@ int Character::getFace()
 {
     return spriteDir;
 }
+
+void Character::setCostume(int a)
+{
+    currentCostume = a;
+}
+
+int Character::getCostume()
+{
+    return currentCostume;
+}
+void Character::changeCostume()
+{
+    switch(currentCostume)
+    {
+        case 1:spriteSheet.loadFromFile("assets/sprites/lady1.png");
+            break;
+        case 2:spriteSheet.loadFromFile("assets/sprites/lady2.png");
+            break;
+        case 3:spriteSheet.loadFromFile("assets/sprites/lady3.png");
+            break;
+        case 4:spriteSheet.loadFromFile("assets/sprites/man1.png");
+            break;
+        case 5:spriteSheet.loadFromFile("assets/sprites/man2.png");
+            break;
+        case 6:spriteSheet.loadFromFile("assets/sprites/man3.png");
+            break;
+    }
+}
 void Character::update(float dt) {
     if(isColliding == false)
     {
