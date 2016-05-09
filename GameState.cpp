@@ -11,7 +11,12 @@ GameState::GameState(StateManager* sm): State(sm), sm(sm){
 	
 }
 
-void GameState::serverLoop(size_t player, std::string username) {
+void GameState::serverLoop(bool generateMap, size_t player, std::string username) {
+	
+	if (generateMap)
+		std::cout << "Generating map..." << std::endl;
+	else
+		std::cout << "Reusing last map..." << std::endl;
 	
 	map = generator->generate(32, 25, 2);
 	mapData = map->printTiles();
@@ -121,6 +126,9 @@ void GameState::onActivate(const std::string& activate) {
 	{
 		isHost = true;
 		ss >> current;
+		bool toGenerate = (current == "Generate");
+
+		ss >> current;
 		size_t players = std::atoi(current.c_str());
 
 		std::string username = "";
@@ -129,7 +137,7 @@ void GameState::onActivate(const std::string& activate) {
 		if (username.length() > 0)
 			username = username.substr(0, username.length()-1);
 
-		networkThread = new std::thread(&GameState::serverLoop, this, players, username);
+		networkThread = new std::thread(&GameState::serverLoop, this, toGenerate, players, username);
 	}
 	else
 	{

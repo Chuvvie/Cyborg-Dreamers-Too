@@ -9,13 +9,26 @@ private:
     StateManager* sm;
     sf::Font font;
     Button back;
-    Button players1;
-    Button players2;
-    Button players3;
-    Button players4;
+	Button play;
     sf::Text nameInput;
     sf::Text nameLabel;
+	sf::Text modeInput;
+	sf::Text modeLabel;
+	sf::Text mapInput;
+	sf::Text mapLabel;
+
+	sf::RectangleShape highlight;
+
+	int* playerCount;
+	std::string* modes;
     std::string name;
+	unsigned int modeIndex;
+
+	std::string* mapOption;
+	unsigned int mapIndex;
+
+	int state;
+
 public:
     HostState(StateManager* sm);
     void update(float dt);

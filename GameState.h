@@ -57,7 +57,7 @@ public:
 	static const uint16_t tcpPort = 8080;
 
     GameState(StateManager* sm);
-    void serverLoop(size_t players, std::string username);
+    void serverLoop(bool generateMap, size_t players, std::string username);
     void clientLoop(std::string ip, std::string username);
     void onActivate(const std::string& accept);
     void onDeactivate();
