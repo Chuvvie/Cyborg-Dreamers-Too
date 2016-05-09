@@ -38,6 +38,8 @@
 		<Unit filename="HUD.h" />
 		<Unit filename="HostState.cpp" />
 		<Unit filename="HostState.h" />
+		<Unit filename="Jewel.cpp" />
+		<Unit filename="Jewel.h" />
 		<Unit filename="JoinState.cpp" />
 		<Unit filename="JoinState.h" />
 		<Unit filename="MenuState.cpp" />
