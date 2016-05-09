@@ -10,7 +10,7 @@ private:
     int move = 0;
     int willMoveNow;
 public:
-    void moveNow(NPC *npc, Map *map, int command);
+    void moveNow(NPC *npc, Map *map);
 };
 
 #endif // AI_H_INCLUDED

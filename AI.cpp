@@ -4,12 +4,23 @@
 #include <random>
 #include <exception>
 
-void AI::moveNow(NPC *npc, Map* map, int command)
+sf::Clock clock3;
+void AI::moveNow(NPC *npc, Map* map)
 {
-
-        if(command >= 0 && willMoveNow <= 4)
+    srand(time(NULL));
+    float nextmove = clock3.getElapsedTime().asSeconds();
+    if(nextmove >= 1)
+    {
+        willMoveNow = rand() % 10 + 1;
+        clock3.restart();
+    }
+    else
+    {
+        willMoveNow == 0;
+    }
+        if(willMoveNow >= 0 && willMoveNow <= 4)
         {
-            if(command == 1)
+            if(willMoveNow == 1)
             {
                 sf::Vector2i next = npc->getIndexPosition() + sf::Vector2i(0, -1);
                 Tile* tile = map->getTile(next.y, next.x);
@@ -24,7 +35,7 @@ void AI::moveNow(NPC *npc, Map* map, int command)
                     npc->setFace(Movement::UP);
                 }
             }
-            else if(command == 2)
+            else if(willMoveNow == 2)
             {
                 sf::Vector2i next = npc->getIndexPosition() + sf::Vector2i(0, 1);
                 Tile* tile = map->getTile(next.y, next.x);
@@ -39,7 +50,7 @@ void AI::moveNow(NPC *npc, Map* map, int command)
                     npc->setFace(Movement::DOWN);
                 }
             }
-            else if(command == 3)
+            else if(willMoveNow == 3)
             {
                 sf::Vector2i next = npc->getIndexPosition() + sf::Vector2i(1, 0);
                 Tile* tile = map->getTile(next.y, next.x);
@@ -54,7 +65,7 @@ void AI::moveNow(NPC *npc, Map* map, int command)
                     npc->setFace(Movement::RIGHT);
                 }
             }
-            else if(command == 4)
+            else if(willMoveNow == 4)
             {
                 sf::Vector2i next = npc->getIndexPosition() + sf::Vector2i(-1, 0);
                 Tile* tile = map->getTile(next.y, next.x);
@@ -72,7 +83,6 @@ void AI::moveNow(NPC *npc, Map* map, int command)
         }
         if(move == 1)
         {
-            sf::Vector2f lastPos = npc->getPosition();
             if(npc->getDirection()==Movement::DOWN) {
             npc->setPosition(sf::Vector2f(0, 4));
             } else if(npc->getDirection()==Movement::LEFT) {
