@@ -2,6 +2,7 @@
 #define ENTITYSUBCLASS_H_INCLUDED
 #include "Entity.h"
 #include "map.h"
+#include "NPC.h"
 
 class Character: public Entity {
 private:
@@ -17,6 +18,7 @@ protected:
     int spriteAction;
     bool isColliding;
     int currentCostume;
+    NPC* target;
 public:
     Character();
     void update(float dt);
@@ -34,6 +36,8 @@ public:
     void setCostume(int);
     void changeCostume();
     int getCostume();
+    void setTarget(NPC*);
+    void kill();
     sf::Vector2i getSprite();
 };
 
