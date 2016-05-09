@@ -22,20 +22,28 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
+		<Unit filename="AI.cpp" />
+		<Unit filename="AI.h" />
 		<Unit filename="Button.cpp" />
 		<Unit filename="Button.h" />
 		<Unit filename="Character.cpp" />
+		<Unit filename="CollisionDetector.cpp" />
+		<Unit filename="CollisionDetector.h" />
 		<Unit filename="EndState.cpp" />
 		<Unit filename="Entity.h" />
 		<Unit filename="EntitySubclass.h" />
 		<Unit filename="GameState.cpp" />
 		<Unit filename="GameState.h" />
+		<Unit filename="HUD.cpp" />
+		<Unit filename="HUD.h" />
 		<Unit filename="HostState.cpp" />
 		<Unit filename="HostState.h" />
 		<Unit filename="JoinState.cpp" />
 		<Unit filename="JoinState.h" />
 		<Unit filename="MenuState.cpp" />
 		<Unit filename="MenuState.h" />
+		<Unit filename="NPC.cpp" />
+		<Unit filename="NPC.h" />
 		<Unit filename="OptionsState.cpp" />
 		<Unit filename="OptionsState.h" />
 		<Unit filename="Runner.cpp" />
