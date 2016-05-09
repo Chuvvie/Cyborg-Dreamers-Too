@@ -13,6 +13,7 @@ protected:
     int ctr = 0;
     int currentCostume;
     bool isColliding;
+    bool isAlive = true;
 public:
     sf::Vector2f position;
     void update(float);
@@ -32,6 +33,8 @@ public:
     void printDirection();
     void isCollidingNow();
     void isNotColliding();
+    bool getAlive();
+    void setDead();
     bool colliding();
     sf::Vector2i getSprite();
     int getCostume();

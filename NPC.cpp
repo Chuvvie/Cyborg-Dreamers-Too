@@ -55,6 +55,15 @@ int NPC::getCostume()
     return currentCostume;
 }
 
+bool NPC::getAlive()
+{
+    return isAlive;
+}
+
+void NPC::setDead()
+{
+    isAlive = false;
+}
 void NPC::setCostume(int a)
 {
     currentCostume = a;
@@ -103,30 +112,40 @@ void NPC::setFace(Movement m) {
 
 void NPC::update(float dt)
 {
-    ai.moveNow(this, &map2);
-    if(this->colliding() == true)
+    if(this->getAlive())
     {
-        this->setFace(this->getDirection());
-    }
+        ai.moveNow(this, &map2);
+        if(this->colliding() == true)
+        {
+            this->setFace(this->getDirection());
+        }
 
-    if(lastTic>0) {
-        lastTic--;
-        if(lastTic>0) return;
-    }
-    lastTic = 4;
+        if(lastTic>0) {
+            lastTic--;
+            if(lastTic>0) return;
+        }
+        lastTic = 4;
 
-    if(spriteAction==1) {
-        spriteAction = 2;
-        return;
-    }
+        if(spriteAction==1) {
+            spriteAction = 2;
+            return;
+        }
 
-    spriteAction = 0;
+        spriteAction = 0;
+    }
+    else
+    {
+
+    }
 }
 void NPC::draw(sf::RenderWindow& window) const {
-    sf::Sprite toRender(spriteSheet, sf::IntRect(spriteAction*32, spriteDir*32, 32, 32));
-    toRender.setOrigin(16, 16);
-    toRender.setPosition(position);
-    window.draw(toRender);
+    if(isAlive == true)
+    {
+        sf::Sprite toRender(spriteSheet, sf::IntRect(spriteAction*32, spriteDir*32, 32, 32));
+        toRender.setOrigin(16, 16);
+        toRender.setPosition(position);
+        window.draw(toRender);
+    }
 }
 
 sf::Vector2i NPC::getIndexPosition() {
