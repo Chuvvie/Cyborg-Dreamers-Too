@@ -1,5 +1,6 @@
 #include "EntitySubclass.h"
 #include <SFML/Graphics.hpp>
+#include <iostream>
 
 Character::Character(): direction(Movement::STAY), position(sf::Vector2f(144, 144)), lastTic(0), spriteDir(0), spriteAction(0) {
     spriteSheet.loadFromFile("assets/sprites/lady1.png");
@@ -47,8 +48,9 @@ int Character::getFace()
     return spriteDir;
 }
 void Character::update(float dt) {
-
-    if(spriteAction!=0  ) {
+    if(isColliding == false)
+    {
+        if(spriteAction!=0  ) {
         if(direction==Movement::DOWN) {
             position += sf::Vector2f(0, 4);
         } else if(direction==Movement::LEFT) {
@@ -58,6 +60,11 @@ void Character::update(float dt) {
         } else if(direction==Movement::UP) {
             position += sf::Vector2f(0, -4);
         }
+        }
+    }
+    else
+    {
+        this->setFace(this->getDirection());
     }
 
     if(lastTic>0) {
