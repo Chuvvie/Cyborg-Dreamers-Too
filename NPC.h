@@ -20,7 +20,6 @@ public:
     void setMap(Map map);
     void setCostume(int);
     NPC();
-    NPC(Map *map);
     void draw(sf::RenderWindow& window) const;
     void setDirection(Movement m);
     void setFace(Movement m);
@@ -35,5 +34,6 @@ public:
     void isNotColliding();
     bool colliding();
     sf::Vector2i getSprite();
+    int getCostume();
 };
 #endif // NPC_H_INCLUDED

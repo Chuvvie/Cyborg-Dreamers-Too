@@ -50,8 +50,14 @@ sf::Vector2i NPC::getSprite()
 NPC::NPC(): direction(Movement::STAY), lastTic(0), spriteDir(0), spriteAction(0){
 }
 
+int NPC::getCostume()
+{
+    return currentCostume;
+}
+
 void NPC::setCostume(int a)
 {
+    currentCostume = a;
     switch(a)
     {
         case 1:spriteSheet.loadFromFile("assets/sprites/lady1.png");
