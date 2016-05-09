@@ -14,6 +14,14 @@ void Character::setDirection(Movement m) {
     setFace(m);
     lastTic = 4;
 }
+void Character::setTarget(NPC* thispc)
+{
+    target = thispc;
+}
+void Character::kill()
+{
+    if(target != nullptr) this->target->setDead();
+}
 
 void Character::isCollidingNow()
 {
