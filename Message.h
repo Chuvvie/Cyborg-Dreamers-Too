@@ -1,16 +1,17 @@
-#ifndef MESSAGE_H_INCLUDED
-#define MESSAGE_H_INCLUDED
+#pragma once
 #include <vector>
 
-enum MessageType: uint8_t {
-	CONNECT = 0,	// client->server  "<username>"
-	CONFIRM,		// server->client  "<ID> <username>"
-	MAP_REQ,		// client->server	n/a
-	MAP,			// server->client	MapMessage
-	WAIT,			// client->server	ID
-	GAME_START,		// server->client	n/a
-	POSITION,		// server<->client PositionMessage
-	GAME_OVER,		// server->client  "<username>"
+enum MessageType : uint8_t {
+	CONNECT = 0,	// client->server: string( desiredName )
+	CONFIRM,		// server->client: string( assignedID + " " + assignedName )
+	MAP_REQUEST,	// client->server: string( "" )
+	MAP_DATA,		// server->client: MapMessage{ height, width } + string( mapData )
+	READY,			// client->server: string( "" )
+	GAME_START,		// server->client: string( "" )
+	UPDATE_INPUT,	// client->server: UpdateInputMessage{  }
+	UPDATE_DATA,	// server->client: UpdateDataMessage{  }
+	GAME_FINISH,	// server->client: string( "" )
+	DISCONNECT		// client->server: string( "" )
 };
 
 struct MessageHeader {
@@ -19,17 +20,29 @@ struct MessageHeader {
 };
 
 struct MapMessage {
-	size_t row;
-	size_t col;
-	size_t floor;
+	size_t clients;
+	size_t height;
+	size_t width;
 };
 
-struct PositionMessage {
-	uint8_t id;
-	uint16_t posX;
-	uint16_t posY;
-	uint8_t direction;
-	bool moving;
+struct UpdateDataMessage {
+	uint8_t ID;
+	bool isAlive;
+	float posX;
+	float posY;
+	int spriteDir;
+	int spriteAction;
+	int currCostume;
 };
 
-#endif // MESSAGE_H_INCLUDED
+struct UpdateInputMessage {
+	uint8_t ID;
+	
+	bool moveUp;
+	bool moveDown;
+	bool moveLeft;
+	bool moveRight;
+	
+	bool interact;
+	bool shift;
+};
