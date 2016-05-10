@@ -1,5 +1,6 @@
 #include "Map.h"
 #include <iostream>
+
 Map::Map(int w, int h)
 {
     this->width = w;
@@ -22,6 +23,32 @@ Map::Map(int w, int h)
     }
 }
 
+Map::Map(uint8_t** mapArray, size_t height, size_t width) :
+	height(height),
+	width(width)
+{
+	this->tiles.resize(height);
+
+	for (int i = 0; i < height; i++)
+	{
+		this->tiles.at(i).resize(width);
+	}
+
+	// Initialize the tiles in the vector.
+	for (int r = 0; r < this->tiles.size(); r++)
+	{
+		for (int c = 0; c < this->tiles.at(r).size(); c++)
+		{
+			this->tiles[r][c] = new Tile(((c * Tile::tileSize) + (Tile::tileSize / 2)), ((r * Tile::tileSize) + (Tile::tileSize / 2)), 1, false);
+			int type = (int) mapArray[r][c];
+			if (type == 4)
+			{
+				type = 2;
+			}
+			this->tiles[r][c]->setType(type);
+		}
+	}
+}
 
 Tile* Map::getTile(int row, int column)
 {

@@ -104,6 +104,8 @@ void ClientConnection::interpretData() {
 		case MessageType::MAP_DATA: {
 			auto recdata = reinterpret_cast<MapMessage*>(recBuffer.data());
 			auto linearized = std::string(reinterpret_cast<char*>(recBuffer.data() + sizeof(MapMessage)));
+			gamestate->totalClients = recdata->clients;
+
 			std::cout << "Got a " << recdata->height << " x " << recdata->width << " map!" << std::endl;
 			std::cout << "Length of string: " << linearized.length() << std::endl;
 
@@ -116,6 +118,12 @@ void ClientConnection::interpretData() {
 					gamestate->mapData[i][j] = (uint8_t)(linearized[position] - '0');
 				}
 			}
+			gamestate->map = new Map(gamestate->mapData, recdata->height, recdata->width);
+
+			gamestate->entities = new std::vector<std::shared_ptr<Entity>>();
+			gamestate->entities->resize(gamestate->totalClients*3);
+			for (auto i = 0; i < gamestate->totalClients * 3; i++)
+				(*gamestate->entities)[i] = std::make_shared<Entity>(0, 0, gamestate, false, i);
 
 			std::string toSend = "";
 			auto mh = MessageHeader{ MessageType::READY, toSend.length() + 1 };
@@ -135,15 +143,18 @@ void ClientConnection::interpretData() {
 			break;
 		}
 		case MessageType::UPDATE_DATA: {
-			auto mh = reinterpret_cast<UpdateDataMessage*>(recBuffer.data());
+			auto data = reinterpret_cast<UpdateDataMessage*>(recBuffer.data());
 
-			std::cout << "Got dummy update data message from server" << std::endl;
-			// TODO
+			gamestate->dataMtx.lock();
+			(*gamestate->entities)[data->ID]->update(*data);
+			gamestate->dataMtx.unlock();
+
 			break;
 		}
 		case MessageType::GAME_FINISH: {
 			isActive = false;
 			gamestate->inGame = false;
+			gamestate->isFinished = true;
 
 			std::cout << "Game has finished!" << std::endl;
 

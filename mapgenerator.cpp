@@ -118,7 +118,7 @@ void MapGenerator::split(Leaf *leaf,int current, int maxdepth)
 Map* MapGenerator::generate(int w, int h, int depth)
 {
 
-    //srand(time(NULL));
+    srand(time(NULL));
 
     Map* finalmap = new Map(w, h);
 

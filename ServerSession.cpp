@@ -69,9 +69,6 @@ void ServerSession::interpretData() {
 			desiredName = gamestate->checkName(desiredName);
 			gamestate->registerName(desiredName);
 
-			std::cout << desiredName << "( " << (int)id << " ) Entered! " << std::endl;
-			std::cout << "Sending CONFIRM to " << username << "( " << (int)id << " )" << std::endl;
-
 			std::string toSend = std::to_string(id) + " " + desiredName;
 			MessageHeader mh = MessageHeader{ MessageType::CONFIRM, toSend.length()+1 };
 			std::vector<uint8_t> sendBuffer;
@@ -83,10 +80,7 @@ void ServerSession::interpretData() {
 		}
 		case MessageType::MAP_REQUEST: {
 
-			std::cout << username << "( " << (int)id << " ) sent MAP REQUEST! " << std::endl;
-			std::cout << "Sending MAP DATA to " << username << "( " << (int)id << " )" << std::endl;
-
-			MapMessage ms = MapMessage{ gamestate->map->getHeight(), gamestate->map->getWidth()};
+			MapMessage ms = MapMessage{ gamestate->totalClients, gamestate->map->getHeight(), gamestate->map->getWidth()};
 			MessageHeader mh = MessageHeader{ MessageType::MAP_DATA, sizeof(MapMessage) + gamestate->compressedMap.length()+1 };
 			std::vector<uint8_t> sendBuffer;
 			sendBuffer.resize(sizeof(MessageHeader) + mh.size);
@@ -99,7 +93,10 @@ void ServerSession::interpretData() {
 		case MessageType::READY: {
 			gamestate->readyClients++;
 
-			std::cout << username << "( " << (int)id << " ) sent READY! " << std::endl;
+			auto pos = gamestate->findFreePosition();
+			gamestate->reserveMap(pos.x, pos.y);
+			character = std::make_shared<Entity>(pos.x, pos.y, gamestate, true, id);
+			(*gamestate->entities)[id] = character;
 
 			if (gamestate->readyClients == gamestate->totalClients)
 			{
@@ -111,24 +108,23 @@ void ServerSession::interpretData() {
 				memcpy(sendBuffer.data() + sizeof(MessageHeader), toSend.data(), mh.size);
 				gamestate->broadcast(sendBuffer);
 
-				std::cout << "Broadcast GAME START to everyone" << std::endl;
-
 				gamestate->inGame = true;
 			}
 			break;
 		}
 		case MessageType::UPDATE_INPUT: {
 			auto inputs = reinterpret_cast<UpdateInputMessage*>(recBuffer.data());
-			// TODO
-
-			std::cout << "Got dummy update input message from " << (int)id << std::endl;
-
+			
+			gamestate->mapMtx.lock();
+			gamestate->dataMtx.lock();
+			(*gamestate->entities)[id]->handleInput(*inputs);
+			gamestate->dataMtx.unlock();
+			gamestate->mapMtx.unlock();
+			
 			break;
 		}
 		case MessageType::DISCONNECT: {
 			gamestate->stillConnected--;
-
-			std::cout << username << "( " << (int)id << " ) sent DISCONNECT! " << std::endl;
 
 			if (gamestate->stillConnected == 1) {
 				(*gamestate->sessions)[this->id] = nullptr;

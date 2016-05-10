@@ -17,7 +17,7 @@ EndState::EndState(StateManager* sm): State(sm), sm(sm)
     //sm->
 }
 
-void EndState::handleInput(int u, int v, const std::string& typed)
+void EndState::handleInput(int u, int v, const std::string& typed, sf::Event e)
 {
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
     {
@@ -37,16 +37,18 @@ void EndState::handleInput(int u, int v, const std::string& typed)
         {
             if(i % 32 ==0 && i != 0)
             {
-                std::cout<<std::endl;
                 file<< '\n';
 
             }
-            std::cout<<tilemap[i];
+
+			if (tilemap[i] == '4')
+				tilemap[i] = 2;
+			else if (tilemap[i] == '7' || tilemap[i] == '8')
+				tilemap[i] = 3;
+
             file << tilemap[i];
         }
-        std::cout<<std::endl;
         file.close();
-
     }
 
 

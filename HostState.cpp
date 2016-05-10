@@ -13,8 +13,8 @@ modeIndex(0),
 mapIndex(0),
 state(-1)
 {
-	modes = new std::string [6] { "Solo Game", "4 Players", "5 Players", "6 Players", "7 Players", "8 Players" };
-	playerCount = new int [6] { 1, 4, 5, 6, 7, 8 };
+	modes = new std::string [6] { "Solo Game", "2 Players", "3 Players", "4 Players", "5 Players", "6 Players" };
+	playerCount = new int [6] { 1, 2, 3, 4, 5, 6 };
 
 	mapOption = new std::string[2] { "Generate", "Load" };
 
@@ -67,7 +67,7 @@ void HostState::update(float dt) {
 	mapInput.setString(mapOption[mapIndex]);
 }
 
-void HostState::handleInput(int u, int v, const std::string& accept) {
+void HostState::handleInput(int u, int v, const std::string& accept, sf::Event e) {
 	if(state==-1)
 		Universal::appendTextInput(name, accept);
 

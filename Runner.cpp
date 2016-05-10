@@ -6,15 +6,18 @@
 #include "GameState.h"
 #include "Universal.h"
 #include "StateSubclass.h"
+#include "OptionsState.h"
+
 int main() {
     srand(time(NULL));
     StateManager sm;
-    SplashState s(&sm); // 0
-    MenuState ms(&sm);  // 1
-    JoinState js(&sm);  // 2
-    HostState hs(&sm);  // 3
-    GameState gs(&sm);  // 4
-    EndState es(&sm);   // 5
+    SplashState s(&sm);		// 0
+    MenuState ms(&sm);		// 1
+    JoinState js(&sm);		// 2
+    HostState hs(&sm);		// 3
+    GameState gs(&sm);		// 4
+    EndState es(&sm);		// 5
+	OptionsState os(&sm);	// 6
 
     sm.addState(&s);
     sm.addState(&ms);
@@ -22,23 +25,31 @@ int main() {
     sm.addState(&hs);
     sm.addState(&gs);
     sm.addState(&es);
+	sm.addState(&os);
     sm.push(0);
     sf::RenderWindow window(sf::VideoMode(Universal::window_width, Universal::window_height), "Jewel Heist", sf::Style::Close);
     sf::Clock clock;
     float lag = 0;
+	bool focus = true;
     while(window.isOpen())
     {
         sf::Event e;
         std::string typed = "";
         while(window.pollEvent(e)) {
-            if(e.type==sf::Event::Closed)
-                window.close();
-            else if(e.type==sf::Event::TextEntered && e.text.unicode<128) {
-                typed += static_cast<char>(e.text.unicode);
-            }
+			if (e.type == sf::Event::Closed)
+				window.close();
+			else if (e.type == sf::Event::TextEntered && e.text.unicode < 128) {
+				typed += static_cast<char>(e.text.unicode);
+			}
+			else if (e.type == sf::Event::GainedFocus)
+				focus = true;
+			else if (e.type == sf::Event::LostFocus)
+				focus = false;
         }
 
-        sm.handleInput(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y, typed);
+		if (focus)
+			sm.handleInput(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y, typed, e);
+		
         sm.update(Universal::spf);
 
         window.clear(sf::Color::Black);

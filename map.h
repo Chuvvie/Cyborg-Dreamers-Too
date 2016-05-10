@@ -12,6 +12,7 @@ class Map {
 
 	public:
 		Map(int w = 0, int h = 0);
+		Map(uint8_t** mapArray, size_t height, size_t width);
 		Tile* getTile(int row, int column);
 		void drawTiles(sf::RenderWindow* window);
 		uint8_t** printTiles();

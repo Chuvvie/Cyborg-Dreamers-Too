@@ -24,7 +24,7 @@ void MenuState::update(float dt)
     cover = std::max(temp, 0);
 }
 
-void MenuState::handleInput(int u, int v, const std::string& typed)
+void MenuState::handleInput(int u, int v, const std::string& typed, sf::Event e)
 {
     bool leftClick = sf::Mouse::isButtonPressed(sf::Mouse::Left);
     if(leftClick && cover > 0) {
@@ -38,7 +38,7 @@ void MenuState::handleInput(int u, int v, const std::string& typed)
         sm->push(3, "");
     }
     if(options.checkCollision(u, v) && leftClick) {
-
+		sm->push(6, "");
     }
     if(exit.checkCollision(u, v) && leftClick) {
         std::exit(0);

@@ -4,6 +4,7 @@
 #include <boost/asio.hpp>
 
 #include "Message.h"
+#include "Entity.h"
 using namespace boost::asio;
 
 class GameState;
@@ -14,6 +15,7 @@ struct ServerSession {
 	MessageType recType;
 	std::string username;
 	GameState* gamestate;
+	std::shared_ptr<Entity> character;
 
 	ip::tcp::socket socket;
 	uint8_t id;

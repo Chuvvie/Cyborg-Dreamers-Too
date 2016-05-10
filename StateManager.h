@@ -13,7 +13,7 @@ public:
     void addState(State* state);
     void push(unsigned int id, const std::string& pass="");
     void pop(unsigned int lvl=1, const std::string& pass="");
-    void handleInput(int u, int v, const std::string& typed);
+    void handleInput(int u, int v, const std::string& typed, sf::Event e);
     void update(float dt);
     void draw(sf::RenderWindow& window) const;
 };

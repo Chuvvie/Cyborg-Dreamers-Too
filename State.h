@@ -21,7 +21,7 @@ public:
         isActive = false;
     }
 
-    virtual void handleInput(int u, int v, const std::string& typed) = 0;
+    virtual void handleInput(int u, int v, const std::string& typed, sf::Event e) = 0;
     virtual void update(float dt) = 0;
     virtual void draw(sf::RenderWindow& window) const = 0;
 };

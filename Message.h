@@ -20,6 +20,7 @@ struct MessageHeader {
 };
 
 struct MapMessage {
+	size_t clients;
 	size_t height;
 	size_t width;
 };
@@ -31,17 +32,17 @@ struct UpdateDataMessage {
 	float posY;
 	int spriteDir;
 	int spriteAction;
+	int currCostume;
 };
 
 struct UpdateInputMessage {
 	uint8_t ID;
 	
-	bool moveUP;
+	bool moveUp;
 	bool moveDown;
 	bool moveLeft;
 	bool moveRight;
 	
 	bool interact;
-	bool stun;
 	bool shift;
 };

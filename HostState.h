@@ -33,7 +33,7 @@ public:
     HostState(StateManager* sm);
     void update(float dt);
     void draw(sf::RenderWindow&) const;
-    void handleInput(int u, int v, const std::string& typed);
+    void handleInput(int u, int v, const std::string& typed, sf::Event e);
 };
 
 #endif // HOSTSTATE_H_INCLUDED
